@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("WaitForService")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Waits for a service to start, then launches a program.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("ConRes - Freddie Lochner")]
 [assembly: AssemblyProduct("WaitForService")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]

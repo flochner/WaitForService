@@ -7,15 +7,16 @@ namespace WaitForService
 {
     static class Program
     {
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            Form1 _obj = new Form1();
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(_obj);
         }
     }
 }
