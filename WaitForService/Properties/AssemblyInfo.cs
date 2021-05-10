@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("WaitForService")]
 [assembly: AssemblyDescription("Waits for a service to start, then launches a program.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ConRes - Freddie Lochner")]
+[assembly: AssemblyCompany("ConRes")]
 [assembly: AssemblyProduct("WaitForService")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]

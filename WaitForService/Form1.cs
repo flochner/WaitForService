@@ -30,7 +30,7 @@ namespace WaitForService
             XmlDocument xDoc = new XmlDocument();
             try
             {
-                xDoc.Load("WaitForService.xml");
+                xDoc.Load("WaitForService.exe.config");
             }
             catch (Exception ex)
             {
