@@ -14,6 +14,7 @@ namespace WaitForService
         int exitStatus = -1;
         string serviceName;// = "postgresql-x64-9.3";
         string programName;// = @"C:\Program Files (x86)\Fluke Calibration\LogWare III Client\LogWare3.exe";
+        string windowState;
 
         public Form1()
         {
@@ -33,24 +34,16 @@ namespace WaitForService
             }
             catch (Exception ex)
             {
-                ModalMessageBox(ex.Message);
+                ModalMessageBox(ex.Message, ex.Source);
                 return;
             }
 
-            try
-            {
-                programName = xDoc.GetElementsByTagName("Application").Item(0).InnerText;
-                programName = Path.GetFileName(programName);
-            }
-            catch (Exception ex)
-            {
-                ModalMessageBox(ex.Message);
-                return;
-            }
-
+            programName = xDoc.GetElementsByTagName("Application").Item(0).InnerText;
             serviceName = xDoc.GetElementsByTagName("Service").Item(0).InnerText;
+            windowState = xDoc.GetElementsByTagName("WindowState").Item(0).InnerText;
+
             Invoke(new MethodInvoker(() => { this.Text = serviceName; }));
-            
+
             do
             {
                 currentStatus = GetStatus(serviceName);
@@ -60,11 +53,14 @@ namespace WaitForService
                         Invoke(new MethodInvoker(() => { label1.Text = currentStatus; }));
                         try
                         {
-                            Process.Start(programName);
+                            ProcessStartInfo startInfo = new ProcessStartInfo();
+                            startInfo.FileName = @programName;
+                            startInfo.WindowStyle = (ProcessWindowStyle)Convert.ToInt32(windowState);
+                            Process.Start(startInfo);
                         }
                         catch (Exception ex)
                         {
-                            ModalMessageBox(ex.Message);
+                            ModalMessageBox(ex.Message, ex.Source);
                             Exit(1);
                             break;
                         }
@@ -79,7 +75,7 @@ namespace WaitForService
                         }
                         catch (Exception ex)
                         {
-                            ModalMessageBox(ex.Message);
+                            ModalMessageBox(ex.Message, ex.Source);
                             Exit(2);
                         }
                         break;
@@ -89,12 +85,12 @@ namespace WaitForService
                         Thread.Sleep(10);
                         if (startAttempts++ > 10)
                         {
-                            ModalMessageBox("Too many start attempts.");
+                            ModalMessageBox("Too many start attempts.", serviceName);
                             Exit(3);
                         }
                         break;
                     default:
-                        ModalMessageBox(currentStatus);
+                        ModalMessageBox(currentStatus, serviceName);
                         Exit(4);
                         break;
                 }
@@ -123,11 +119,11 @@ namespace WaitForService
             }
         }
 
-        private void ModalMessageBox(string message)
+        private void ModalMessageBox(string message, string source)
         {
             Invoke(new MethodInvoker(() =>
             {
-                MessageBox.Show(this, message);
+                MessageBox.Show(this, message, source);
             }));
         }
 
