@@ -7,7 +7,7 @@
     <ProjectGuid>{2FAE10D9-D915-497A-9BDB-E05342CC287B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>WaitForService</RootNamespace>
-    <AssemblyName>StartLogWare</AssemblyName>
+    <AssemblyName>WaitForService</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -59,7 +59,7 @@
     <ManifestKeyFile>WaitForService_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -123,6 +123,11 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WaitForService.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

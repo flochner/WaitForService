@@ -4,18 +4,25 @@ using System.Threading;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace WaitForService
 {
     public partial class Form1 : Form
     {
         int exitStatus = -1;
-        string serviceName = "postgresql-x64-9.3";
-        string programName = @"C:\Program Files (x86)\Fluke Calibration\LogWare III Client\LogWare3.exe";
+        string serviceName;// = "postgresql-x64-9.3";
+        string programName;// = @"C:\Program Files (x86)\Fluke Calibration\LogWare III Client\LogWare3.exe";
 
         public Form1()
         {
             InitializeComponent();
+
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load("WaitForService.xml");
+            programName = xDoc.GetElementsByTagName("Application").Item(0).InnerText;
+            serviceName = xDoc.GetElementsByTagName("Service").Item(0).InnerText;
+            
             this.Text = serviceName;
             backgroundWorker1.RunWorkerAsync();
         }
