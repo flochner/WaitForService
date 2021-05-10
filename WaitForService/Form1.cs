@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Xml;
+using System.IO;
 
 namespace WaitForService
 {
@@ -16,14 +17,7 @@ namespace WaitForService
 
         public Form1()
         {
-            InitializeComponent();
-
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.Load("WaitForService.xml");
-            programName = xDoc.GetElementsByTagName("Application").Item(0).InnerText;
-            serviceName = xDoc.GetElementsByTagName("Service").Item(0).InnerText;
-            
-            this.Text = serviceName;
+            InitializeComponent();            
             backgroundWorker1.RunWorkerAsync();
         }
 
@@ -32,13 +26,38 @@ namespace WaitForService
             int startAttempts = 0;
             string currentStatus;
 
+            XmlDocument xDoc = new XmlDocument();
+            try
+            {
+                xDoc.Load("WaitForService.xml");
+            }
+            catch (Exception ex)
+            {
+                ModalMessageBox(ex.Message);
+                return;
+            }
+
+            try
+            {
+                programName = xDoc.GetElementsByTagName("Application").Item(0).InnerText;
+                programName = Path.GetFileName(programName);
+            }
+            catch (Exception ex)
+            {
+                ModalMessageBox(ex.Message);
+                return;
+            }
+
+            serviceName = xDoc.GetElementsByTagName("Service").Item(0).InnerText;
+            Invoke(new MethodInvoker(() => { this.Text = serviceName; }));
+            
             do
             {
                 currentStatus = GetStatus(serviceName);
                 switch (currentStatus)
                 {
                     case "Running":
-                        label1.Text = currentStatus;
+                        Invoke(new MethodInvoker(() => { label1.Text = currentStatus; }));
                         try
                         {
                             Process.Start(programName);
@@ -47,11 +66,12 @@ namespace WaitForService
                         {
                             ModalMessageBox(ex.Message);
                             Exit(1);
+                            break;
                         }
                         Exit(0);
                         break;
                     case "Stopped":
-                        label1.Text = currentStatus;
+                        Invoke(new MethodInvoker(() => { label1.Text = currentStatus; }));
                         var svc = new ServiceController(serviceName);
                         try
                         {
@@ -64,9 +84,10 @@ namespace WaitForService
                         }
                         break;
                     case "StartPending":
-                        label1.Text = "Starting";
-                        progressBar1.MarqueeAnimationSpeed = 10;
-                        if (startAttempts++ > 3)
+                        Invoke(new MethodInvoker(() => { label1.Text = currentStatus; }));
+                        Invoke(new MethodInvoker(() => { progressBar1.MarqueeAnimationSpeed = 10; }));
+                        Thread.Sleep(10);
+                        if (startAttempts++ > 10)
                         {
                             ModalMessageBox("Too many start attempts.");
                             Exit(3);
@@ -80,11 +101,11 @@ namespace WaitForService
 
                 do
                 {
-                    if (backgroundWorker1.CancellationPending == true) return;
                     Thread.Sleep(10);
+                    if (backgroundWorker1.CancellationPending == true) return;
                 } while (GetStatus(serviceName).Equals(currentStatus));
 
-                progressBar1.MarqueeAnimationSpeed = 0;
+                Invoke(new MethodInvoker(() => { progressBar1.MarqueeAnimationSpeed = 0; }));
 
             } while (true);
         }
