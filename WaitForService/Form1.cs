@@ -141,6 +141,14 @@ namespace WaitForService
         {
             Environment.Exit(exitStatus);
         }
-   }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            { 
+                backgroundWorker1.CancelAsync();
+            }
+        }
+    }
 }
 
