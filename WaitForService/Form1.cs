@@ -42,6 +42,14 @@ namespace WaitForService
             serviceName = xDoc.GetElementsByTagName("Service").Item(0).InnerText;
             windowState = xDoc.GetElementsByTagName("WindowState").Item(0).InnerText;
 
+            if (string.IsNullOrEmpty(programName) ||
+                string.IsNullOrEmpty(serviceName) ||
+                string.IsNullOrEmpty(windowState))
+            {
+                var settings = new Form2(programName);
+                settings.ShowDialog();
+            }
+
             Invoke(new MethodInvoker(() => { this.Text = serviceName; }));
 
             do
@@ -56,7 +64,7 @@ namespace WaitForService
                             ProcessStartInfo startInfo = new ProcessStartInfo
                             {
                                 FileName = @programName,
-                                WindowStyle = (ProcessWindowStyle)Convert.ToInt32(windowState)
+                                WindowStyle = (ProcessWindowStyle)int.Parse(windowState)
                             };
                             Process.Start(startInfo);
                         }

@@ -15,14 +15,14 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_3FDA466ED3F541E7834CF218F16D044F"
+        "MsmKey" = "8:_42B34BE2B8A74F1DA3B9E383F6C44367"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3FDA466ED3F541E7834CF218F16D044F"
+        "OwnerKey" = "8:_42B34BE2B8A74F1DA3B9E383F6C44367"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -169,7 +169,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WaitForService"
         "ProductCode" = "8:{299A42EF-FAF8-44DA-ABB8-420ACD0A144A}"
-        "PackageCode" = "8:{D3373A37-EFD9-4AB3-B99D-AFF3DABD3B9A}"
+        "PackageCode" = "8:{60A0200D-B2F0-4ADB-AAE0-DBF953955679}"
         "UpgradeCode" = "8:{EB6D39FA-9B1D-4DA4-A693-C0AED7116317}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -688,9 +688,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3FDA466ED3F541E7834CF218F16D044F"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_42B34BE2B8A74F1DA3B9E383F6C44367"
             {
-            "SourcePath" = "8:..\\WaitForService\\obj\\Release\\WaitForService.exe"
+            "SourcePath" = "8:..\\WaitForService\\obj\\Debug\\WaitForService.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B746A60F5E36422BA39B7DE0EDCC392D"
@@ -710,6 +710,34 @@
             "ProjectOutputGroupRegister" = "3:1"
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{2FAE10D9-D915-497A-9BDB-E05342CC287B}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_4CEA3FF647C0445689F5849AB20E040F"
+            {
+            "SourcePath" = "8:"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_B746A60F5E36422BA39B7DE0EDCC392D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:SourceFiles"
             "OutputProjectGuid" = "8:{2FAE10D9-D915-497A-9BDB-E05342CC287B}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
