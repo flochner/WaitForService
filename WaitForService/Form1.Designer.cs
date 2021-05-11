@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.BackgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -44,11 +44,11 @@
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 1;
             // 
-            // backgroundWorker1
+            // BackgroundWorker1
             // 
-            this.backgroundWorker1.WorkerSupportsCancellation = true;
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            this.BackgroundWorker1.WorkerSupportsCancellation = true;
+            this.BackgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
+            this.BackgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker1_RunWorkerCompleted);
             // 
             // label1
             // 
@@ -82,7 +82,7 @@
         #endregion
 
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.ComponentModel.BackgroundWorker BackgroundWorker1;
         private System.Windows.Forms.Label label1;
     }
 }

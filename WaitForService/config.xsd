@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema id="config"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="urn:Test.Namespace"
+    xmlns="urn:Test.Namespace"
+    elementFormDefault="qualified"
+>
+  <xsd:element name="configuration">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Service" type="xsd:string"/>
+        <xsd:element name="Application" type="xsd:string"/>
+        <xsd:element name="WindowState" type="xsd:integer"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

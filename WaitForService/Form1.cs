@@ -19,10 +19,10 @@ namespace WaitForService
         public Form1()
         {
             InitializeComponent();            
-            backgroundWorker1.RunWorkerAsync();
+            BackgroundWorker1.RunWorkerAsync();
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             int startAttempts = 0;
             string currentStatus;
@@ -30,7 +30,7 @@ namespace WaitForService
             XmlDocument xDoc = new XmlDocument();
             try
             {
-                xDoc.Load("WaitForService.exe.config");
+                xDoc.Load("config.xml");
             }
             catch (Exception ex)
             {
@@ -53,9 +53,11 @@ namespace WaitForService
                         Invoke(new MethodInvoker(() => { label1.Text = currentStatus; }));
                         try
                         {
-                            ProcessStartInfo startInfo = new ProcessStartInfo();
-                            startInfo.FileName = @programName;
-                            startInfo.WindowStyle = (ProcessWindowStyle)Convert.ToInt32(windowState);
+                            ProcessStartInfo startInfo = new ProcessStartInfo
+                            {
+                                FileName = @programName,
+                                WindowStyle = (ProcessWindowStyle)Convert.ToInt32(windowState)
+                            };
                             Process.Start(startInfo);
                         }
                         catch (Exception ex)
@@ -98,7 +100,7 @@ namespace WaitForService
                 do
                 {
                     Thread.Sleep(10);
-                    if (backgroundWorker1.CancellationPending == true) return;
+                    if (BackgroundWorker1.CancellationPending == true) return;
                 } while (GetStatus(serviceName).Equals(currentStatus));
 
                 Invoke(new MethodInvoker(() => { progressBar1.MarqueeAnimationSpeed = 0; }));
@@ -130,10 +132,10 @@ namespace WaitForService
         private void Exit(int status)
         {
             exitStatus = status;
-            backgroundWorker1.CancelAsync();
+            BackgroundWorker1.CancelAsync();
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Environment.Exit(exitStatus);
         }
@@ -142,7 +144,7 @@ namespace WaitForService
         {
             if (e.KeyCode == Keys.Escape)
             { 
-                backgroundWorker1.CancelAsync();
+                BackgroundWorker1.CancelAsync();
             }
         }
     }
