@@ -12,21 +12,13 @@ namespace WaitForService
     public partial class Form1 : Form
     {
         int exitStatus = -1;
-        public string serviceName;// = "postgresql-x64-9.3";
-        public string appName;// = @"C:\Program Files (x86)\Fluke Calibration\LogWare III Client\LogWare3.exe";
-        public string windowState;
+        public static string serviceName;// = "postgresql-x64-9.3";
+        public static string appName;// = @"C:\Program Files (x86)\Fluke Calibration\LogWare III Client\LogWare3.exe";
+        public static string windowState;
 
         public Form1()
         {
-            InitializeComponent();            
-            BackgroundWorker1.RunWorkerAsync();
-        }
-
-        private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            int startAttempts = 0;
-            string currentStatus;
-
+            InitializeComponent();
             XmlDocument xDoc = new XmlDocument();
             try
             {
@@ -49,6 +41,14 @@ namespace WaitForService
                 var settings = new Form2(serviceName, appName, windowState);
                 settings.ShowDialog();
             }
+            BackgroundWorker1.RunWorkerAsync();
+        }
+
+        private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            int startAttempts = 0;
+            string currentStatus;
+
 
             Invoke(new MethodInvoker(() => { this.Text = serviceName; }));
 
