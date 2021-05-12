@@ -12,9 +12,9 @@ namespace WaitForService
     public partial class Form1 : Form
     {
         int exitStatus = -1;
-        string serviceName;// = "postgresql-x64-9.3";
-        string programName;// = @"C:\Program Files (x86)\Fluke Calibration\LogWare III Client\LogWare3.exe";
-        string windowState;
+        public string serviceName;// = "postgresql-x64-9.3";
+        public string appName;// = @"C:\Program Files (x86)\Fluke Calibration\LogWare III Client\LogWare3.exe";
+        public string windowState;
 
         public Form1()
         {
@@ -38,15 +38,15 @@ namespace WaitForService
                 return;
             }
 
-            programName = xDoc.GetElementsByTagName("Application").Item(0).InnerText;
             serviceName = xDoc.GetElementsByTagName("Service").Item(0).InnerText;
+            appName = xDoc.GetElementsByTagName("Application").Item(0).InnerText;
             windowState = xDoc.GetElementsByTagName("WindowState").Item(0).InnerText;
 
-            if (string.IsNullOrEmpty(programName) ||
-                string.IsNullOrEmpty(serviceName) ||
+            if (string.IsNullOrEmpty(serviceName) ||
+                string.IsNullOrEmpty(appName) ||
                 string.IsNullOrEmpty(windowState))
             {
-                var settings = new Form2(programName);
+                var settings = new Form2(serviceName, appName, windowState);
                 settings.ShowDialog();
             }
 
@@ -63,7 +63,7 @@ namespace WaitForService
                         {
                             ProcessStartInfo startInfo = new ProcessStartInfo
                             {
-                                FileName = @programName,
+                                FileName = appName,
                                 WindowStyle = (ProcessWindowStyle)int.Parse(windowState)
                             };
                             Process.Start(startInfo);

@@ -1,9 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<configuration
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="urn:Test.Namespace"
-    xsi:schemaLocation="urn:Test.Namespace config.xsd"
->
+<configuration>
   <Service>Spooler</Service>
   <Application>notepad.exe</Application>
   <!-- Normal=0, Hidden=1, Minimized=2, Maximized=3 -->

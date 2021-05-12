@@ -12,13 +12,13 @@ namespace WaitForService
 {
     public partial class Form2 : Form
     {
-        public Form2(string programName)
+        public Form2(string serviceName, string appName, string windowState)
         {
             InitializeComponent();
-            this.textBox1.Text = programName;
+            this.textBox1.Text = appName;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonBrowse_Click(object sender, EventArgs e)
         {
             var fileContent = string.Empty;
             var filePath = string.Empty;
@@ -35,6 +35,16 @@ namespace WaitForService
                     filePath = openFileDialog.FileName;
                 }
             }
+        }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
