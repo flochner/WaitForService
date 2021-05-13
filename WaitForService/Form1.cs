@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Xml;
-using System.IO;
 
 namespace WaitForService
 {

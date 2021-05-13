@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxApp = new System.Windows.Forms.TextBox();
             this.buttonBrowse = new System.Windows.Forms.Button();
@@ -38,6 +39,7 @@
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.checkBoxMSsvcs = new System.Windows.Forms.CheckBox();
+            this.checkBoxSave = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -80,13 +82,16 @@
             // 
             // comboBoxService
             // 
+            this.comboBoxService.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxService.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxService.FormattingEnabled = true;
             this.comboBoxService.Location = new System.Drawing.Point(74, 12);
+            this.comboBoxService.MaxDropDownItems = 15;
             this.comboBoxService.Name = "comboBoxService";
             this.comboBoxService.Size = new System.Drawing.Size(292, 21);
             this.comboBoxService.Sorted = true;
             this.comboBoxService.TabIndex = 1;
+            this.comboBoxService.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxService_DrawItem);
             this.comboBoxService.SelectedIndexChanged += new System.EventHandler(this.comboBoxService_SelectedIndexChanged);
             // 
             // label3
@@ -119,7 +124,7 @@
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Enabled = false;
-            this.buttonOK.Location = new System.Drawing.Point(364, 96);
+            this.buttonOK.Location = new System.Drawing.Point(361, 89);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 5;
@@ -131,7 +136,7 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(445, 96);
+            this.buttonCancel.Location = new System.Drawing.Point(442, 89);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 6;
@@ -142,6 +147,8 @@
             // checkBoxMSsvcs
             // 
             this.checkBoxMSsvcs.AutoSize = true;
+            this.checkBoxMSsvcs.Checked = true;
+            this.checkBoxMSsvcs.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxMSsvcs.Location = new System.Drawing.Point(373, 15);
             this.checkBoxMSsvcs.Name = "checkBoxMSsvcs";
             this.checkBoxMSsvcs.Size = new System.Drawing.Size(136, 17);
@@ -150,11 +157,24 @@
             this.checkBoxMSsvcs.UseVisualStyleBackColor = true;
             this.checkBoxMSsvcs.CheckedChanged += new System.EventHandler(this.checkBoxMSsvcs_CheckedChanged);
             // 
+            // checkBoxSave
+            // 
+            this.checkBoxSave.AutoSize = true;
+            this.checkBoxSave.Checked = true;
+            this.checkBoxSave.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxSave.Location = new System.Drawing.Point(74, 93);
+            this.checkBoxSave.Name = "checkBoxSave";
+            this.checkBoxSave.Size = new System.Drawing.Size(90, 17);
+            this.checkBoxSave.TabIndex = 8;
+            this.checkBoxSave.Text = "Save settings";
+            this.checkBoxSave.UseVisualStyleBackColor = true;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(532, 131);
+            this.ClientSize = new System.Drawing.Size(529, 124);
+            this.Controls.Add(this.checkBoxSave);
             this.Controls.Add(this.checkBoxMSsvcs);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
@@ -165,6 +185,7 @@
             this.Controls.Add(this.buttonBrowse);
             this.Controls.Add(this.textBoxApp);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configuration";
@@ -185,5 +206,6 @@
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.CheckBox checkBoxMSsvcs;
+        private System.Windows.Forms.CheckBox checkBoxSave;
     }
 }

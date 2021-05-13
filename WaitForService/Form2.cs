@@ -15,6 +15,8 @@ namespace WaitForService
 {
     public partial class Form2 : Form
     {
+        private List<string> serviceList = new List<string>();
+
         public Form2(string serviceName, string appName, string windowState)
         {
             InitializeComponent();
@@ -25,22 +27,26 @@ namespace WaitForService
         private void PopulateServices()
         {
             comboBoxService.Items.Clear();
+            serviceList.Clear();
+            this.Text = "Configuration";
 
             ServiceController[] services = ServiceController.GetServices();
 
-            // try to find service name
             foreach (ServiceController service in services)
             {
-
                 RegistryKey regKey1 = Registry.LocalMachine.OpenSubKey("SYSTEM\\CurrentControlSet\\services\\" + service.ServiceName);
                 var imagePath = regKey1.GetValue("ImagePath").ToString();
                 if (checkBoxMSsvcs.Checked && !(imagePath.Contains("Windows") || imagePath.Contains("windows") || imagePath.Contains("WINDOWS")))
                 {
-                    comboBoxService.Items.Add(service.ServiceName + "       " + regKey1.GetValue("ImagePath").ToString());
+                    comboBoxService.Items.Add(service.ServiceName);
+                    if (regKey1.GetValue("DisplayName") != null)
+                       serviceList.Add(regKey1.GetValue("DisplayName").ToString()); 
                 }
                 else if (!checkBoxMSsvcs.Checked)
                 {
-                    comboBoxService.Items.Add(service.ServiceName + "       " + regKey1.GetValue("ImagePath").ToString());
+                    comboBoxService.Items.Add(service.ServiceName);
+                    if (regKey1.GetValue("DisplayName") != null)
+                        serviceList.Add(regKey1.GetValue("DisplayName").ToString());
                 }
             }
         }
@@ -69,21 +75,9 @@ namespace WaitForService
 
         }
 
-        private void SetOKbuttonStatus()
-        {
-            if (string.IsNullOrEmpty(comboBoxService.Text) || string.IsNullOrEmpty(textBoxApp.Text) || string.IsNullOrEmpty(comboBoxStartup.Text))
-            {
-                buttonOK.Enabled = false;
-            }
-            else
-            {
-                buttonOK.Enabled = true;
-            }
-        }
         private void buttonOK_Click(object sender, EventArgs e)
         {
             Form1.serviceName = comboBoxService.Text;
-
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -95,6 +89,32 @@ namespace WaitForService
         {
             PopulateServices();
         }
+
+        private void comboBoxService_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index == -1)
+            {
+                this.Text = "Configuration";
+                return;
+            }
+
+            //user mouse is hovering over this drop-down item, update its data  
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                this.Text = serviceList[e.Index];
+            }
+
+            e.DrawBackground();
+
+            if (e.State.ToString().Contains("Selected"))
+            {
+                e.Graphics.DrawString(comboBoxService.Items[e.Index].ToString(), e.Font, Brushes.White, new Point(e.Bounds.X, e.Bounds.Y));
+            }
+            else
+            {
+                e.Graphics.DrawString(comboBoxService.Items[e.Index].ToString(), e.Font, Brushes.Black, new Point(e.Bounds.X, e.Bounds.Y));
+            }
+        } 
 
         private void comboBoxService_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -109,6 +129,17 @@ namespace WaitForService
         private void comboBoxStartup_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetOKbuttonStatus();
+        }
+        private void SetOKbuttonStatus()
+        {
+            if (string.IsNullOrEmpty(comboBoxService.Text) || string.IsNullOrEmpty(textBoxApp.Text) || string.IsNullOrEmpty(comboBoxStartup.Text))
+            {
+                buttonOK.Enabled = false;
+            }
+            else
+            {
+                buttonOK.Enabled = true;
+            }
         }
     }
 }
