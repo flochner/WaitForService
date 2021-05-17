@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxApp = new System.Windows.Forms.TextBox();
             this.buttonBrowse = new System.Windows.Forms.Button();
@@ -110,9 +109,9 @@
             this.comboBoxStartup.FormattingEnabled = true;
             this.comboBoxStartup.Items.AddRange(new object[] {
             "Normal",
+            "Hidden",
             "Minimized",
-            "Maximized",
-            "Hidden"});
+            "Maximized"});
             this.comboBoxStartup.Location = new System.Drawing.Point(74, 66);
             this.comboBoxStartup.Name = "comboBoxStartup";
             this.comboBoxStartup.Size = new System.Drawing.Size(121, 21);
@@ -147,8 +146,6 @@
             // checkBoxMSsvcs
             // 
             this.checkBoxMSsvcs.AutoSize = true;
-            this.checkBoxMSsvcs.Checked = true;
-            this.checkBoxMSsvcs.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxMSsvcs.Location = new System.Drawing.Point(373, 15);
             this.checkBoxMSsvcs.Name = "checkBoxMSsvcs";
             this.checkBoxMSsvcs.Size = new System.Drawing.Size(136, 17);

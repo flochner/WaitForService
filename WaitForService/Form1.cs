@@ -10,10 +10,10 @@ namespace WaitForService
 {
     public partial class Form1 : Form
     {
-        int exitStatus = -1;
-        public static string serviceName;// = "postgresql-x64-9.3";
-        public static string appName;// = @"C:\Program Files (x86)\Fluke Calibration\LogWare III Client\LogWare3.exe";
-        public static string windowState;
+        private int exitStatus = -1;
+        private string serviceName;// = "postgresql-x64-9.3";
+        private string appName;// = @"C:\Program Files (x86)\Fluke Calibration\LogWare III Client\LogWare3.exe";
+        private string windowStart;
 
         public Form1()
         {
@@ -31,16 +31,25 @@ namespace WaitForService
 
             serviceName = xDoc.GetElementsByTagName("Service").Item(0).InnerText;
             appName = xDoc.GetElementsByTagName("Application").Item(0).InnerText;
-            windowState = xDoc.GetElementsByTagName("WindowState").Item(0).InnerText;
+            windowStart = xDoc.GetElementsByTagName("WindowState").Item(0).InnerText;
 
             if (string.IsNullOrEmpty(serviceName) ||
                 string.IsNullOrEmpty(appName) ||
-                string.IsNullOrEmpty(windowState))
+                string.IsNullOrEmpty(windowStart))
             {
-                var settings = new Form2(serviceName, appName, windowState);
+                var settings = new Form2(serviceName, appName, windowStart);
                 settings.ShowDialog();
+
+                if (settings.DialogResult == DialogResult.Cancel)
+                { 
+                    Environment.Exit(exitStatus); 
+                }
+
+                serviceName = settings.ServiceName;
+                appName = settings.AppName;
+                windowStart = settings.WindowStart;
             }
-            BackgroundWorker1.RunWorkerAsync();
+            //BackgroundWorker1.RunWorkerAsync();
         }
 
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -63,7 +72,7 @@ namespace WaitForService
                             ProcessStartInfo startInfo = new ProcessStartInfo
                             {
                                 FileName = appName,
-                                WindowStyle = (ProcessWindowStyle)int.Parse(windowState)
+                                WindowStyle = (ProcessWindowStyle)int.Parse(windowStart)
                             };
                             Process.Start(startInfo);
                         }

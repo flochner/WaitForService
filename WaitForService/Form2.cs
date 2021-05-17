@@ -16,11 +16,29 @@ namespace WaitForService
     public partial class Form2 : Form
     {
         private List<string> serviceList = new List<string>();
+        public string ServiceName { get => serviceName; set => serviceName = value; }
+        public string AppName { get => appName; set => appName = value; }
+        public string WindowStart { get => windowStart; set => windowStart = value; }
 
-        public Form2(string serviceName, string appName, string windowState)
+        private string appName;
+        private string windowStart;
+        private string serviceName;
+
+        public Form2(string sN, string aN, string wS)
         {
             InitializeComponent();
+            serviceName = sN; appName = aN; windowStart = wS;
+
+            comboBoxService.Text = serviceName;
             textBoxApp.Text = appName;
+            if (string.IsNullOrEmpty(windowStart))
+            {
+                comboBoxStartup.SelectedIndex = -1;
+            }
+            else
+            {
+                comboBoxStartup.SelectedIndex = int.Parse(windowStart);
+            }
             PopulateServices();
         }
 
@@ -29,6 +47,7 @@ namespace WaitForService
             comboBoxService.Items.Clear();
             serviceList.Clear();
             this.Text = "Configuration";
+            int currentItem = 0;
 
             ServiceController[] services = ServiceController.GetServices();
 
@@ -40,7 +59,7 @@ namespace WaitForService
                 {
                     comboBoxService.Items.Add(service.ServiceName);
                     if (regKey1.GetValue("DisplayName") != null)
-                       serviceList.Add(regKey1.GetValue("DisplayName").ToString()); 
+                        serviceList.Add(regKey1.GetValue("DisplayName").ToString());
                 }
                 else if (!checkBoxMSsvcs.Checked)
                 {
@@ -48,6 +67,16 @@ namespace WaitForService
                     if (regKey1.GetValue("DisplayName") != null)
                         serviceList.Add(regKey1.GetValue("DisplayName").ToString());
                 }
+                if (service.ServiceName == this.serviceName)
+                {
+                    comboBoxService.SelectedItem = comboBoxService.Items.Count;
+                }
+                //if (service.ServiceName == this.serviceName)
+                //{
+                //    comboBoxService.SelectedIndex = currentItem;
+                //}
+
+                currentItem++;
             }
         }
 
@@ -57,10 +86,10 @@ namespace WaitForService
             var filePath = string.Empty;
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-                openFileDialog.FilterIndex = 2;
-                openFileDialog.RestoreDirectory = true;
+            openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
             try
             {
                 if (openFileDialog.ShowDialog(this) == DialogResult.OK)
@@ -77,7 +106,7 @@ namespace WaitForService
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            Form1.serviceName = comboBoxService.Text;
+
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -114,7 +143,7 @@ namespace WaitForService
             {
                 e.Graphics.DrawString(comboBoxService.Items[e.Index].ToString(), e.Font, Brushes.Black, new Point(e.Bounds.X, e.Bounds.Y));
             }
-        } 
+        }
 
         private void comboBoxService_SelectedIndexChanged(object sender, EventArgs e)
         {
