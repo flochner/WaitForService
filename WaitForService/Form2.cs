@@ -16,13 +16,15 @@ namespace WaitForService
     public partial class Form2 : Form
     {
         private List<string> serviceList = new List<string>();
-        public string ServiceName { get => serviceName; set => serviceName = value; }
-        public string AppName { get => appName; set => appName = value; }
-        public string WindowStart { get => windowStart; set => windowStart = value; }
+        public string ServiceName { get => serviceName; }
+        public string AppName { get => appName; }
+        public string WindowStart { get => windowStart; }
+        public bool SaveSettings { get => saveSettings; }
 
+        private bool saveSettings;
+        private string serviceName;
         private string appName;
         private string windowStart;
-        private string serviceName;
 
         public Form2(string sN, string aN, string wS)
         {
@@ -44,46 +46,39 @@ namespace WaitForService
 
         private void PopulateServices()
         {
+            string imagePath;
+            RegistryKey regKey;
+
             comboBoxService.Items.Clear();
             serviceList.Clear();
             this.Text = "Configuration";
-            int currentItem = 0;
 
             ServiceController[] services = ServiceController.GetServices();
 
             foreach (ServiceController service in services)
             {
-                RegistryKey regKey1 = Registry.LocalMachine.OpenSubKey("SYSTEM\\CurrentControlSet\\services\\" + service.ServiceName);
-                var imagePath = regKey1.GetValue("ImagePath").ToString();
-                if (checkBoxMSsvcs.Checked && !(imagePath.Contains("Windows") || imagePath.Contains("windows") || imagePath.Contains("WINDOWS")))
-                {
-                    comboBoxService.Items.Add(service.ServiceName);
-                    if (regKey1.GetValue("DisplayName") != null)
-                        serviceList.Add(regKey1.GetValue("DisplayName").ToString());
-                }
-                else if (!checkBoxMSsvcs.Checked)
-                {
-                    comboBoxService.Items.Add(service.ServiceName);
-                    if (regKey1.GetValue("DisplayName") != null)
-                        serviceList.Add(regKey1.GetValue("DisplayName").ToString());
-                }
-                if (service.ServiceName == this.serviceName)
-                {
-                    comboBoxService.SelectedItem = comboBoxService.Items.Count;
-                }
-                //if (service.ServiceName == this.serviceName)
-                //{
-                //    comboBoxService.SelectedIndex = currentItem;
-                //}
+                regKey = Registry.LocalMachine.OpenSubKey("SYSTEM\\CurrentControlSet\\services\\" + service.ServiceName);
+                imagePath = regKey.GetValue("ImagePath").ToString().ToLower();
 
-                currentItem++;
+                if (checkBoxMSsvcs.Checked &&
+                    (imagePath.Contains("svchost") || imagePath.Contains("windows") || imagePath.Contains("microsoft")) &&
+                    !imagePath.Contains("driverstore"))
+                {
+                    continue;
+                }
+
+                comboBoxService.Items.Add(service.ServiceName);
+                serviceList.Add(service.DisplayName);
+
+                if (service.ServiceName == this.serviceName)
+                    comboBoxService.SelectedItem = service.ServiceName;
             }
         }
 
         private void buttonBrowse_Click(object sender, EventArgs e)
         {
-            var fileContent = string.Empty;
-            var filePath = string.Empty;
+            string fileContent;
+            string filePath;
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = "c:\\";
@@ -93,9 +88,7 @@ namespace WaitForService
             try
             {
                 if (openFileDialog.ShowDialog(this) == DialogResult.OK)
-                {
                     filePath = openFileDialog.FileName;
-                }
             }
             catch (Exception ex)
             {
@@ -106,7 +99,10 @@ namespace WaitForService
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-
+            serviceName = comboBoxService.Text;
+            appName = textBoxApp.Text;
+            windowStart = comboBoxStartup.SelectedIndex.ToString();
+            saveSettings = checkBoxSave.Checked;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -127,17 +123,12 @@ namespace WaitForService
                 return;
             }
 
-            //user mouse is hovering over this drop-down item, update its data  
-            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
-            {
-                this.Text = serviceList[e.Index];
-            }
-
             e.DrawBackground();
 
             if (e.State.ToString().Contains("Selected"))
             {
                 e.Graphics.DrawString(comboBoxService.Items[e.Index].ToString(), e.Font, Brushes.White, new Point(e.Bounds.X, e.Bounds.Y));
+                this.Text = serviceList[e.Index];
             }
             else
             {
@@ -159,6 +150,7 @@ namespace WaitForService
         {
             SetOKbuttonStatus();
         }
+
         private void SetOKbuttonStatus()
         {
             if (string.IsNullOrEmpty(comboBoxService.Text) || string.IsNullOrEmpty(textBoxApp.Text) || string.IsNullOrEmpty(comboBoxStartup.Text))

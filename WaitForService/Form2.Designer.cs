@@ -88,7 +88,6 @@
             this.comboBoxService.MaxDropDownItems = 15;
             this.comboBoxService.Name = "comboBoxService";
             this.comboBoxService.Size = new System.Drawing.Size(292, 21);
-            this.comboBoxService.Sorted = true;
             this.comboBoxService.TabIndex = 1;
             this.comboBoxService.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxService_DrawItem);
             this.comboBoxService.SelectedIndexChanged += new System.EventHandler(this.comboBoxService_SelectedIndexChanged);
