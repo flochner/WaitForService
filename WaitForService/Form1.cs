@@ -13,52 +13,12 @@ namespace WaitForService
         private int exitStatus = -1;
         private string serviceName;// = "postgresql-x64-9.3";
         private string appName;// = @"C:\Program Files (x86)\Fluke Calibration\LogWare III Client\LogWare3.exe";
-        private string windowStart;
+        private string appStart;
 
         public Form1()
         {
             InitializeComponent();
-
-            XDocument xDoc;
-            try
-            { xDoc = XDocument.Load("config.xml"); }
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message, ex.Source); return; }
-
-            XElement elSvc = xDoc.Root.Element("Service");
-            XElement elApp = xDoc.Root.Element("Application");
-            XElement elStart = xDoc.Root.Element("WindowStart");
-
-            serviceName = elSvc.Value;
-            appName = elApp.Value;
-            windowStart = elStart.Value;
-
-            if (string.IsNullOrEmpty(serviceName) ||
-                string.IsNullOrEmpty(appName) ||
-                string.IsNullOrEmpty(windowStart))
-            {
-                Form2 settings = new Form2(serviceName, appName, windowStart);
-                settings.ShowDialog();
-
-                if (settings.DialogResult == DialogResult.OK)
-                {
-                    serviceName = settings.ServiceName;
-                    appName = settings.AppName;
-                    windowStart = settings.WindowStart;
-                    if (settings.SaveSettings)
-                    {
-                        elSvc.Value = serviceName;
-                        elApp.Value = appName;
-                        elStart.Value = windowStart;
-                        xDoc.Save("config.xml");
-                    }
-                }
-                else
-                {
-                    Environment.Exit(exitStatus);
-                }
-                settings.Dispose();
-            }
+            LoadSaveSettings();
             BackgroundWorker1.RunWorkerAsync();
         }
 
@@ -82,7 +42,7 @@ namespace WaitForService
                             ProcessStartInfo startInfo = new ProcessStartInfo
                             {
                                 FileName = appName,
-                                WindowStyle = (ProcessWindowStyle)int.Parse(windowStart)
+                                WindowStyle = (ProcessWindowStyle)int.Parse(appStart)
                             };
                             Process.Start(startInfo);
                         }
@@ -132,6 +92,50 @@ namespace WaitForService
                 Invoke(new MethodInvoker(() => { progressBar1.MarqueeAnimationSpeed = 0; }));
 
             } while (true);
+        }
+
+        private void LoadSaveSettings()
+        {
+            XDocument xDoc;
+            try
+            { xDoc = XDocument.Load("config.xml"); }
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message, ex.Source); return; }
+
+            XElement elSvc = xDoc.Root.Element("Service");
+            XElement elApp = xDoc.Root.Element("Application");
+            XElement elStart = xDoc.Root.Element("ApplicationStart");
+
+            serviceName = elSvc.Value;
+            appName = elApp.Value;
+            appStart = elStart.Value;
+
+            if (string.IsNullOrEmpty(serviceName) ||
+                string.IsNullOrEmpty(appName) ||
+                string.IsNullOrEmpty(appStart))
+            {
+                Form2 settings = new Form2(serviceName, appName, appStart);
+                settings.ShowDialog();
+
+                if (settings.DialogResult == DialogResult.OK)
+                {
+                    serviceName = settings.ServiceName;
+                    appName = settings.AppName;
+                    appStart = settings.AppStart;
+                    if (settings.SaveSettings)
+                    {
+                        elSvc.Value = serviceName;
+                        elApp.Value = appName;
+                        elStart.Value = appStart;
+                        xDoc.Save("config.xml");
+                    }
+                }
+                else
+                {
+                    Environment.Exit(exitStatus);
+                }
+                settings.Dispose();
+            }
         }
 
         private string GetStatus(string serviceName)
