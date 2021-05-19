@@ -18,29 +18,27 @@ namespace WaitForService
         private List<string> serviceList = new List<string>();
         public string ServiceName { get => serviceName; }
         public string AppName { get => appName; }
-        public string WindowStart { get => windowStart; }
+        public string AppStart { get => appStart; }
         public bool SaveSettings { get => saveSettings; }
 
         private bool saveSettings;
         private string serviceName;
         private string appName;
-        private string windowStart;
+        private string appStart;
 
-        public Form2(string sN, string aN, string wS)
+        public Form2(string sN, string aN, string aS)
         {
             InitializeComponent();
-            serviceName = sN; appName = aN; windowStart = wS;
+
+            serviceName = sN; appName = aN; appStart = aS;
 
             comboBoxService.Text = serviceName;
             textBoxApp.Text = appName;
-            if (string.IsNullOrEmpty(windowStart))
-            {
+            if (string.IsNullOrEmpty(appStart))
                 comboBoxStartup.SelectedIndex = -1;
-            }
             else
-            {
-                comboBoxStartup.SelectedIndex = int.Parse(windowStart);
-            }
+                comboBoxStartup.SelectedIndex = int.Parse(appStart);
+
             PopulateServices();
         }
 
@@ -75,38 +73,40 @@ namespace WaitForService
             }
         }
 
-        private void buttonBrowse_Click(object sender, EventArgs e)
-        {
-            string fileContent;
-            string filePath;
-
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = "c:\\";
-            openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            openFileDialog.FilterIndex = 2;
-            openFileDialog.RestoreDirectory = true;
-            try
-            {
-                if (openFileDialog.ShowDialog(this) == DialogResult.OK)
-                    filePath = openFileDialog.FileName;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-        }
-
         private void buttonOK_Click(object sender, EventArgs e)
         {
             serviceName = comboBoxService.Text;
             appName = textBoxApp.Text;
-            windowStart = comboBoxStartup.SelectedIndex.ToString();
+            appStart = comboBoxStartup.SelectedIndex.ToString();
             saveSettings = checkBoxSave.Checked;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void buttonBrowse_Click(object sender, EventArgs e)
+        {
+            string filePath;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = @"C:\Program Files";
+            openFileDialog.Filter = "Programs (*.exe;*.com)|*.exe;*.com|Batch Files (*.bat;*.cmd)|*.bat;*.cmd|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.RestoreDirectory = true;
+            try
+            {
+                if (openFileDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    filePath = openFileDialog.FileName;
+                    textBoxApp.Text = filePath;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.Source);
+            }
 
         }
 
