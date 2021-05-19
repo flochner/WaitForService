@@ -4,7 +4,7 @@ using System.Threading;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
-using System.Xml;
+using System.Xml.Linq;
 
 namespace WaitForService
 {
@@ -18,38 +18,48 @@ namespace WaitForService
         public Form1()
         {
             InitializeComponent();
-            XmlDocument xDoc = new XmlDocument();
-            try
-            {
-                xDoc.Load("config.xml");
-            }
-            catch (Exception ex)
-            {
-                ModalMessageBox(ex.Message, ex.Source);
-                return;
-            }
 
-            serviceName = xDoc.GetElementsByTagName("Service").Item(0).InnerText;
-            appName = xDoc.GetElementsByTagName("Application").Item(0).InnerText;
-            windowStart = xDoc.GetElementsByTagName("WindowState").Item(0).InnerText;
+            XDocument xDoc;
+            try
+            { xDoc = XDocument.Load("config.xml"); }
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message, ex.Source); return; }
+
+            XElement elSvc = xDoc.Root.Element("Service");
+            XElement elApp = xDoc.Root.Element("Application");
+            XElement elStart = xDoc.Root.Element("WindowStart");
+
+            serviceName = elSvc.Value;
+            appName = elApp.Value;
+            windowStart = elStart.Value;
 
             if (string.IsNullOrEmpty(serviceName) ||
                 string.IsNullOrEmpty(appName) ||
                 string.IsNullOrEmpty(windowStart))
             {
-                var settings = new Form2(serviceName, appName, windowStart);
+                Form2 settings = new Form2(serviceName, appName, windowStart);
                 settings.ShowDialog();
 
-                if (settings.DialogResult == DialogResult.Cancel)
-                { 
-                    Environment.Exit(exitStatus); 
+                if (settings.DialogResult == DialogResult.OK)
+                {
+                    serviceName = settings.ServiceName;
+                    appName = settings.AppName;
+                    windowStart = settings.WindowStart;
+                    if (settings.SaveSettings)
+                    {
+                        elSvc.Value = serviceName;
+                        elApp.Value = appName;
+                        elStart.Value = windowStart;
+                        xDoc.Save("config.xml");
+                    }
                 }
-
-                serviceName = settings.ServiceName;
-                appName = settings.AppName;
-                windowStart = settings.WindowStart;
+                else
+                {
+                    Environment.Exit(exitStatus);
+                }
+                settings.Dispose();
             }
-            //BackgroundWorker1.RunWorkerAsync();
+            BackgroundWorker1.RunWorkerAsync();
         }
 
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
