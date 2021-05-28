@@ -18,8 +18,10 @@ namespace WaitForService
         public Form1()
         {
             InitializeComponent();
-            LoadSaveSettings();
-            BackgroundWorker1.RunWorkerAsync();
+            if (LoadSaveSettings() == true)
+                BackgroundWorker1.RunWorkerAsync();
+            else
+                Environment.Exit(exitStatus);
         }
 
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -94,13 +96,18 @@ namespace WaitForService
             } while (true);
         }
 
-        private void LoadSaveSettings()
+        private bool LoadSaveSettings()
         {
             XDocument xDoc;
             try
-            { xDoc = XDocument.Load("config.xml"); }
+            { 
+                xDoc = XDocument.Load("config.xml"); 
+            }
             catch (Exception ex)
-            { MessageBox.Show(ex.Message, ex.Source); return; }
+            { 
+                MessageBox.Show(ex.Message, ex.Source); 
+                return false; 
+            }
 
             XElement elSvc = xDoc.Root.Element("Service");
             XElement elApp = xDoc.Root.Element("Application");
@@ -132,10 +139,11 @@ namespace WaitForService
                 }
                 else
                 {
-                    Environment.Exit(exitStatus);
+                    return false;
                 }
                 settings.Dispose();
             }
+            return true;
         }
 
         private string GetStatus(string serviceName)
