@@ -157,5 +157,45 @@ namespace WaitForService
                 buttonOK.Enabled = true;
             }
         }
+
+        private void checkBoxRunatLogon_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxRunatLogon.Checked)
+            {
+                comboBoxUser.Enabled = true;
+                var dict = SetStartupUser();
+
+                var values = dict.Values;
+
+            }
+            else
+            {
+                comboBoxUser.Enabled = false;
+            }
+        }
+
+        private Dictionary<RegistryKey, object> SetStartupUser()
+        {
+            var valuesByName = new Dictionary<RegistryKey, object>();
+
+            const string REGISTRY_ROOT = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\";
+
+            using (RegistryKey rootKey = Registry.LocalMachine.OpenSubKey(REGISTRY_ROOT))
+            {
+                string[] profileSIDs = rootKey.GetSubKeyNames();
+                foreach (string currSID in profileSIDs)
+                {
+                    using (RegistryKey currSubKey = Registry.LocalMachine.OpenSubKey(REGISTRY_ROOT + currSID))
+                    {
+                        object value = currSubKey.GetValue("ProfileImagePath");
+                        valuesByName.Add(currSubKey, value);
+                        currSubKey.Close();
+                    }
+                }
+                rootKey.Close();
+            }
+
+            return valuesByName;
+        }
     }
 }
