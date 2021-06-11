@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using System.Security.AccessControl;
 
 namespace WaitForService
 {
@@ -100,16 +99,26 @@ namespace WaitForService
 
         private bool LoadSaveSettings()
         {
-            
+
             XDocument xDoc;
+            string configPath;
+            string appPath;
+            string appRoot = @"SOFTWARE\WOW6432Node\ConRes\WaitForService\";
+
+            using (RegistryKey rootKey = Registry.LocalMachine.OpenSubKey(appRoot))
+            {
+                configPath = rootKey.GetValue("ConfigPath").ToString();
+                rootKey.Close();
+            }
+
             try
-            { 
-                xDoc = XDocument.Load("config.xml"); 
+            {
+                xDoc = XDocument.Load(configPath + "config.xml");
             }
             catch (Exception ex)
-            { 
-                MessageBox.Show(ex.Message, ex.Source); 
-                return false; 
+            {
+                MessageBox.Show(ex.Message, ex.Source);
+                return false;
             }
 
             XElement elSvc = xDoc.Root.Element("Service");
@@ -137,23 +146,21 @@ namespace WaitForService
                         elSvc.Value = serviceName;
                         elApp.Value = appName;
                         elStart.Value = appStart;
-                        xDoc.Save("config.xml");
+                        xDoc.Save(configPath + "config.xml");
 
-                        string installPath;
                         if (settings.RunatLogon == true)
                         {
-                            string installRoot = @"SOFTWARE\WOW6432Node\ConRes\WaitForService\";
                             string runRoot = settings.RunatLogonUser + @"\SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
 
-                            using (RegistryKey rootKey = Registry.LocalMachine.OpenSubKey(installRoot))
+                            using (RegistryKey rootKey = Registry.LocalMachine.OpenSubKey(appRoot))
                             {
-                                installPath = rootKey.GetValue("Path").ToString();
+                                appPath = rootKey.GetValue("AppPath").ToString();
                                 rootKey.Close();
                             }
-                            
+
                             using (RegistryKey rootKey = Registry.Users.OpenSubKey(runRoot, true))
                             {
-                                rootKey.SetValue("WaitForService", installPath);
+                                rootKey.SetValue("WaitForService", appPath);
                                 rootKey.Close();
                             }
                         }
