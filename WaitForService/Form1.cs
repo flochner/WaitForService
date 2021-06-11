@@ -146,7 +146,7 @@ namespace WaitForService
                         elSvc.Value = serviceName;
                         elApp.Value = appName;
                         elStart.Value = appStart;
-                        xDoc.Save(configPath + "config.xml");
+                        //xDoc.Save(configPath + "config.xml");
 
                         if (settings.RunatLogon == true)
                         {
@@ -155,6 +155,7 @@ namespace WaitForService
                             using (RegistryKey rootKey = Registry.LocalMachine.OpenSubKey(appRoot))
                             {
                                 appPath = rootKey.GetValue("AppPath").ToString();
+                                rootKey.SetValue("Test Name", "Text Data");
                                 rootKey.Close();
                             }
 

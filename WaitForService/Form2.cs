@@ -39,7 +39,7 @@ namespace WaitForService
             else
                 comboBoxStartup.SelectedIndex = int.Parse(appStart);
 
-            SetStartupUser();
+            //SetStartupUser();
 
             PopulateServices();
         }
@@ -157,8 +157,8 @@ namespace WaitForService
         {
             if (string.IsNullOrEmpty(comboBoxService.Text) || 
                 string.IsNullOrEmpty(textBoxApp.Text) || 
-                string.IsNullOrEmpty(comboBoxStartup.Text) ||
-                (checkBoxRunatLogon.Checked == true && comboBoxUser.SelectedIndex == -1)
+                string.IsNullOrEmpty(comboBoxStartup.Text) //||
+                //(checkBoxRunatLogon.Checked == true && comboBoxUser.SelectedIndex == -1)
                 )
             {
                 buttonOK.Enabled = false;

@@ -189,7 +189,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WaitForService"
         "ProductCode" = "8:{BB70290B-AEF0-4A33-8F2A-288F10127CDA}"
-        "PackageCode" = "8:{6DF65863-9F1B-4598-9E9D-0C4A189B9D5E}"
+        "PackageCode" = "8:{93E59C6F-11C1-4A88-9C00-FF98A3D7ECFF}"
         "UpgradeCode" = "8:{EB6D39FA-9B1D-4DA4-A693-C0AED7116317}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
