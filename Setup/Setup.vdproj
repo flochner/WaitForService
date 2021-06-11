@@ -176,15 +176,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WaitForService"
-        "ProductCode" = "8:{AB783DB3-0C34-4FB3-BAB0-EA56539D5F5F}"
-        "PackageCode" = "8:{CFCC8DB5-583C-4F0F-A6A6-876D550D919E}"
+        "ProductCode" = "8:{BB70290B-AEF0-4A33-8F2A-288F10127CDA}"
+        "PackageCode" = "8:{DB99F2A8-7DE4-4106-A8AC-E1A2FC8A1087}"
         "UpgradeCode" = "8:{EB6D39FA-9B1D-4DA4-A693-C0AED7116317}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.5"
+        "ProductVersion" = "8:1.1.0"
         "Manufacturer" = "8:ConRes"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -222,11 +222,33 @@
                             {
                             "Name" = "8:[Manufacturer]"
                             "Condition" = "8:"
-                            "AlwaysCreate" = "11:FALSE"
+                            "AlwaysCreate" = "11:TRUE"
                             "DeleteAtUninstall" = "11:FALSE"
                             "Transitive" = "11:FALSE"
                                 "Keys"
                                 {
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_2CD3C388CEBE4ED6A260240AB14F8414"
+                                    {
+                                    "Name" = "8:[ProductName]"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:TRUE"
+                                    "DeleteAtUninstall" = "11:TRUE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                        }
+                                        "Values"
+                                        {
+                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_656C7D1CDBB54DCC8751ED274D2CFE23"
+                                            {
+                                            "Name" = "8:Path"
+                                            "Condition" = "8:"
+                                            "Transitive" = "11:FALSE"
+                                            "ValueTypes" = "3:1"
+                                            "Value" = "8:[TARGETDIR][ProductName].exe"
+                                            }
+                                        }
+                                    }
                                 }
                                 "Values"
                                 {
@@ -698,7 +720,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_42B34BE2B8A74F1DA3B9E383F6C44367"
             {
-            "SourcePath" = "8:..\\WaitForService\\obj\\Release\\WaitForService.exe"
+            "SourcePath" = "8:..\\WaitForService\\obj\\Debug\\WaitForService.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B746A60F5E36422BA39B7DE0EDCC392D"

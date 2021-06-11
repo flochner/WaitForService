@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.ServiceProcess;
 using System.Threading;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using System.Security.AccessControl;
 
 namespace WaitForService
 {
@@ -98,6 +100,7 @@ namespace WaitForService
 
         private bool LoadSaveSettings()
         {
+            
             XDocument xDoc;
             try
             { 
@@ -135,6 +138,25 @@ namespace WaitForService
                         elApp.Value = appName;
                         elStart.Value = appStart;
                         xDoc.Save("config.xml");
+
+                        string installPath;
+                        if (settings.RunatLogon == true)
+                        {
+                            string installRoot = @"SOFTWARE\WOW6432Node\ConRes\WaitForService\";
+                            string runRoot = settings.RunatLogonUser + @"\SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
+
+                            using (RegistryKey rootKey = Registry.LocalMachine.OpenSubKey(installRoot))
+                            {
+                                installPath = rootKey.GetValue("Path").ToString();
+                                rootKey.Close();
+                            }
+                            
+                            using (RegistryKey rootKey = Registry.Users.OpenSubKey(runRoot, true))
+                            {
+                                rootKey.SetValue("WaitForService", installPath);
+                                rootKey.Close();
+                            }
+                        }
                     }
                 }
                 else
