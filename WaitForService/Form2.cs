@@ -10,16 +10,16 @@ namespace WaitForService
 {
     public partial class Form2 : Form
     {
-        private List<string> serviceList = new List<string>();
-        public string ServiceName { get => serviceName; }
+        public bool SaveSettings { get => saveSettings; }
         public string AppName { get => appName; }
         public string AppVis { get => appVis; }
-        public bool SaveSettings { get => saveSettings; }
+        public string ServiceName { get => serviceName; }
 
         private bool saveSettings;
-        private string serviceName;
         private string appName;
         private string appVis;
+        private string serviceName;
+        private List<string> serviceList = new List<string>();
 
         public Form2(string sN, string aN, string aV)
         {
@@ -85,16 +85,16 @@ namespace WaitForService
         {
             string filePath;
 
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = @"C:\Program Files";
-            openFileDialog.Filter = "Programs (*.exe;*.com)|*.exe;*.com|Batch Files (*.bat;*.cmd)|*.bat;*.cmd|All files (*.*)|*.*";
-            openFileDialog.FilterIndex = 1;
-            openFileDialog.RestoreDirectory = true;
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.InitialDirectory = @"C:\Program Files";
+            openFile.Filter = "Programs (*.exe;*.com)|*.exe;*.com|Batch Files (*.bat;*.cmd)|*.bat;*.cmd|All files (*.*)|*.*";
+            openFile.FilterIndex = 1;
+            openFile.RestoreDirectory = true;
             try
             {
-                if (openFileDialog.ShowDialog(this) == DialogResult.OK)
+                if (openFile.ShowDialog(this) == DialogResult.OK)
                 {
-                    filePath = openFileDialog.FileName;
+                    filePath = openFile.FileName;
                     textBoxApp.Text = filePath;
                 }
             }

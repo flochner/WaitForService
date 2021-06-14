@@ -177,7 +177,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WaitForService"
         "ProductCode" = "8:{AB783DB3-0C34-4FB3-BAB0-EA56539D5F5F}"
-        "PackageCode" = "8:{CFCC8DB5-583C-4F0F-A6A6-876D550D919E}"
+        "PackageCode" = "8:{12B77E41-18D9-4A56-8784-A68A1049FF3B}"
         "UpgradeCode" = "8:{EB6D39FA-9B1D-4DA4-A693-C0AED7116317}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -256,11 +256,25 @@
                             {
                             "Name" = "8:[Manufacturer]"
                             "Condition" = "8:"
-                            "AlwaysCreate" = "11:FALSE"
+                            "AlwaysCreate" = "11:TRUE"
                             "DeleteAtUninstall" = "11:FALSE"
                             "Transitive" = "11:FALSE"
                                 "Keys"
                                 {
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_CDC7CC7931034496816ABDEECB56E65E"
+                                    {
+                                    "Name" = "8:[ProductName]"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:TRUE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
                                 }
                                 "Values"
                                 {
@@ -698,7 +712,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_42B34BE2B8A74F1DA3B9E383F6C44367"
             {
-            "SourcePath" = "8:..\\WaitForService\\obj\\Release\\WaitForService.exe"
+            "SourcePath" = "8:..\\WaitForService\\obj\\Debug\\WaitForService.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B746A60F5E36422BA39B7DE0EDCC392D"
