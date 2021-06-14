@@ -39,6 +39,9 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.checkBoxMSsvcs = new System.Windows.Forms.CheckBox();
             this.checkBoxSave = new System.Windows.Forms.CheckBox();
+            this.comboBoxUser = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.checkBoxRunatLogon = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -113,7 +116,7 @@
             "Maximized"});
             this.comboBoxStartup.Location = new System.Drawing.Point(74, 66);
             this.comboBoxStartup.Name = "comboBoxStartup";
-            this.comboBoxStartup.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxStartup.Size = new System.Drawing.Size(292, 21);
             this.comboBoxStartup.TabIndex = 4;
             this.comboBoxStartup.SelectedIndexChanged += new System.EventHandler(this.comboBoxStartup_SelectedIndexChanged);
             // 
@@ -122,7 +125,7 @@
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Enabled = false;
-            this.buttonOK.Location = new System.Drawing.Point(361, 89);
+            this.buttonOK.Location = new System.Drawing.Point(351, 141);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 5;
@@ -134,7 +137,7 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(442, 89);
+            this.buttonCancel.Location = new System.Drawing.Point(432, 141);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 6;
@@ -155,21 +158,61 @@
             // 
             // checkBoxSave
             // 
+            this.checkBoxSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxSave.AutoSize = true;
             this.checkBoxSave.Checked = true;
             this.checkBoxSave.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSave.Location = new System.Drawing.Point(74, 93);
+            this.checkBoxSave.Location = new System.Drawing.Point(74, 145);
             this.checkBoxSave.Name = "checkBoxSave";
             this.checkBoxSave.Size = new System.Drawing.Size(90, 17);
             this.checkBoxSave.TabIndex = 8;
             this.checkBoxSave.Text = "Save settings";
             this.checkBoxSave.UseVisualStyleBackColor = true;
             // 
+            // comboBoxUser
+            // 
+            this.comboBoxUser.Enabled = false;
+            this.comboBoxUser.FormattingEnabled = true;
+            this.comboBoxUser.Location = new System.Drawing.Point(74, 93);
+            this.comboBoxUser.Name = "comboBoxUser";
+            this.comboBoxUser.Size = new System.Drawing.Size(292, 21);
+            this.comboBoxUser.TabIndex = 9;
+            this.comboBoxUser.Visible = false;
+            this.comboBoxUser.SelectedIndexChanged += new System.EventHandler(this.comboBoxUser_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Enabled = false;
+            this.label4.Location = new System.Drawing.Point(39, 96);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "User";
+            this.label4.Visible = false;
+            // 
+            // checkBoxRunatLogon
+            // 
+            this.checkBoxRunatLogon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxRunatLogon.AutoSize = true;
+            this.checkBoxRunatLogon.Checked = true;
+            this.checkBoxRunatLogon.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxRunatLogon.Location = new System.Drawing.Point(74, 122);
+            this.checkBoxRunatLogon.Name = "checkBoxRunatLogon";
+            this.checkBoxRunatLogon.Size = new System.Drawing.Size(220, 17);
+            this.checkBoxRunatLogon.TabIndex = 11;
+            this.checkBoxRunatLogon.Text = "Run at startup for currently logged in user";
+            this.checkBoxRunatLogon.UseVisualStyleBackColor = true;
+            this.checkBoxRunatLogon.CheckedChanged += new System.EventHandler(this.checkBoxRunatLogon_CheckedChanged);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 124);
+            this.ClientSize = new System.Drawing.Size(519, 176);
+            this.Controls.Add(this.checkBoxRunatLogon);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.comboBoxUser);
             this.Controls.Add(this.checkBoxSave);
             this.Controls.Add(this.checkBoxMSsvcs);
             this.Controls.Add(this.buttonCancel);
@@ -203,5 +246,8 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.CheckBox checkBoxMSsvcs;
         private System.Windows.Forms.CheckBox checkBoxSave;
+        private System.Windows.Forms.ComboBox comboBoxUser;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox checkBoxRunatLogon;
     }
 }
