@@ -34,7 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxService = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBoxStartup = new System.Windows.Forms.ComboBox();
+            this.comboBoxVisibility = new System.Windows.Forms.ComboBox();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.checkBoxMSsvcs = new System.Windows.Forms.CheckBox();
@@ -98,24 +98,24 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(27, 69);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Startup";
+            this.label3.Text = "Visibility";
             // 
-            // comboBoxStartup
+            // comboBoxVisibility
             // 
-            this.comboBoxStartup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxStartup.FormattingEnabled = true;
-            this.comboBoxStartup.Items.AddRange(new object[] {
+            this.comboBoxVisibility.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxVisibility.FormattingEnabled = true;
+            this.comboBoxVisibility.Items.AddRange(new object[] {
             "Normal",
             "Hidden",
             "Minimized",
             "Maximized"});
-            this.comboBoxStartup.Location = new System.Drawing.Point(74, 66);
-            this.comboBoxStartup.Name = "comboBoxStartup";
-            this.comboBoxStartup.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxStartup.TabIndex = 4;
-            this.comboBoxStartup.SelectedIndexChanged += new System.EventHandler(this.comboBoxStartup_SelectedIndexChanged);
+            this.comboBoxVisibility.Location = new System.Drawing.Point(74, 66);
+            this.comboBoxVisibility.Name = "comboBoxVisibility";
+            this.comboBoxVisibility.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxVisibility.TabIndex = 4;
+            this.comboBoxVisibility.SelectedIndexChanged += new System.EventHandler(this.comboBoxVisibility_SelectedIndexChanged);
             // 
             // buttonOK
             // 
@@ -174,7 +174,7 @@
             this.Controls.Add(this.checkBoxMSsvcs);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
-            this.Controls.Add(this.comboBoxStartup);
+            this.Controls.Add(this.comboBoxVisibility);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBoxService);
             this.Controls.Add(this.label2);
@@ -198,7 +198,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBoxService;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBoxStartup;
+        private System.Windows.Forms.ComboBox comboBoxVisibility;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.CheckBox checkBoxMSsvcs;

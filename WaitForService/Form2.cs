@@ -13,26 +13,26 @@ namespace WaitForService
         private List<string> serviceList = new List<string>();
         public string ServiceName { get => serviceName; }
         public string AppName { get => appName; }
-        public string AppStart { get => appStart; }
+        public string AppVis { get => appVis; }
         public bool SaveSettings { get => saveSettings; }
 
         private bool saveSettings;
         private string serviceName;
         private string appName;
-        private string appStart;
+        private string appVis;
 
-        public Form2(string sN, string aN, string aS)
+        public Form2(string sN, string aN, string aV)
         {
             InitializeComponent();
 
-            serviceName = sN; appName = aN; appStart = aS;
+            serviceName = sN; appName = aN; appVis = aV;
 
             comboBoxService.Text = serviceName;
             textBoxApp.Text = appName;
-            if (string.IsNullOrEmpty(appStart))
-                comboBoxStartup.SelectedIndex = -1;
+            if (string.IsNullOrEmpty(appVis))
+                comboBoxVisibility.SelectedIndex = -1;
             else
-                comboBoxStartup.SelectedIndex = int.Parse(appStart);
+                comboBoxVisibility.SelectedIndex = int.Parse(appVis);
 
             PopulateServices();
         }
@@ -72,7 +72,7 @@ namespace WaitForService
         {
             serviceName = comboBoxService.Text;
             appName = textBoxApp.Text;
-            appStart = comboBoxStartup.SelectedIndex.ToString();
+            appVis = comboBoxVisibility.SelectedIndex.ToString();
             saveSettings = checkBoxSave.Checked;
         }
 
@@ -141,14 +141,14 @@ namespace WaitForService
             SetOKbuttonStatus();
         }
 
-        private void comboBoxStartup_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxVisibility_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetOKbuttonStatus();
         }
 
         private void SetOKbuttonStatus()
         {
-            if (string.IsNullOrEmpty(comboBoxService.Text) || string.IsNullOrEmpty(textBoxApp.Text) || string.IsNullOrEmpty(comboBoxStartup.Text))
+            if (string.IsNullOrEmpty(comboBoxService.Text) || string.IsNullOrEmpty(textBoxApp.Text) || string.IsNullOrEmpty(comboBoxVisibility.Text))
             {
                 buttonOK.Enabled = false;
             }

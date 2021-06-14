@@ -3,5 +3,5 @@
   <Service></Service>
   <Application></Application>
   <!-- Normal=0, Hidden=1, Minimized=2, Maximized=3 -->
-  <ApplicationStart></ApplicationStart>
+  <ApplicationVisibility></ApplicationVisibility>
 </configuration>

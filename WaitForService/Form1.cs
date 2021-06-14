@@ -13,7 +13,7 @@ namespace WaitForService
         private int exitStatus = -1;
         private string serviceName;// = "postgresql-x64-9.3";
         private string appName;// = @"C:\Program Files (x86)\Fluke Calibration\LogWare III Client\LogWare3.exe";
-        private string appStart;
+        private string appVis;
 
         public Form1()
         {
@@ -44,7 +44,7 @@ namespace WaitForService
                             ProcessStartInfo startInfo = new ProcessStartInfo
                             {
                                 FileName = appName,
-                                WindowStyle = (ProcessWindowStyle)int.Parse(appStart)
+                                WindowStyle = (ProcessWindowStyle)int.Parse(appVis)
                             };
                             Process.Start(startInfo);
                         }
@@ -111,29 +111,29 @@ namespace WaitForService
 
             XElement elSvc = xDoc.Root.Element("Service");
             XElement elApp = xDoc.Root.Element("Application");
-            XElement elStart = xDoc.Root.Element("ApplicationStart");
+            XElement elVis = xDoc.Root.Element("ApplicationVisibility");
 
             serviceName = elSvc.Value;
             appName = elApp.Value;
-            appStart = elStart.Value;
+            appVis = elVis.Value;
 
             if (string.IsNullOrEmpty(serviceName) ||
                 string.IsNullOrEmpty(appName) ||
-                string.IsNullOrEmpty(appStart))
+                string.IsNullOrEmpty(appVis))
             {
-                Form2 settings = new Form2(serviceName, appName, appStart);
+                Form2 settings = new Form2(serviceName, appName, appVis);
                 settings.ShowDialog();
 
                 if (settings.DialogResult == DialogResult.OK)
                 {
                     serviceName = settings.ServiceName;
                     appName = settings.AppName;
-                    appStart = settings.AppStart;
+                    appVis = settings.AppVis;
                     if (settings.SaveSettings)
                     {
                         elSvc.Value = serviceName;
                         elApp.Value = appName;
-                        elStart.Value = appStart;
+                        elVis.Value = appVis;
                         xDoc.Save("config.xml");
                     }
                 }
