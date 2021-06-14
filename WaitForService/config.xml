@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
-  <Service>FolderSize</Service>
-  <Application>C:\Program Files\7-Zip\7zFM.exe</Application>
+  <Service></Service>
+  <Application></Application>
   <!-- Normal=0, Hidden=1, Minimized=2, Maximized=3 -->
   <ApplicationStart></ApplicationStart>
 </configuration>

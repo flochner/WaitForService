@@ -10,21 +10,16 @@ namespace WaitForService
 {
     public partial class Form2 : Form
     {
-        public bool SaveSettings { get => saveSettings; }
-        public bool RunatLogon { get => runatLogon; }
+        private List<string> serviceList = new List<string>();
         public string ServiceName { get => serviceName; }
         public string AppName { get => appName; }
         public string AppStart { get => appStart; }
-        public string RunatLogonUser { get => runatLogonUser; }
+        public bool SaveSettings { get => saveSettings; }
 
         private bool saveSettings;
-        private bool runatLogon;
-        private string runatLogonUser;
         private string serviceName;
         private string appName;
         private string appStart;
-        private List<string> serviceList = new List<string>();
-        private Dictionary<string, string> profiles = new Dictionary<string, string>();
 
         public Form2(string sN, string aN, string aS)
         {
@@ -38,8 +33,6 @@ namespace WaitForService
                 comboBoxStartup.SelectedIndex = -1;
             else
                 comboBoxStartup.SelectedIndex = int.Parse(appStart);
-
-            //SetStartupUser();
 
             PopulateServices();
         }
@@ -92,16 +85,16 @@ namespace WaitForService
         {
             string filePath;
 
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.InitialDirectory = @"C:\Program Files";
-            openFile.Filter = "Programs (*.exe;*.com)|*.exe;*.com|Batch Files (*.bat;*.cmd)|*.bat;*.cmd|All files (*.*)|*.*";
-            openFile.FilterIndex = 1;
-            openFile.RestoreDirectory = true;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = @"C:\Program Files";
+            openFileDialog.Filter = "Programs (*.exe;*.com)|*.exe;*.com|Batch Files (*.bat;*.cmd)|*.bat;*.cmd|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.RestoreDirectory = true;
             try
             {
-                if (openFile.ShowDialog(this) == DialogResult.OK)
+                if (openFileDialog.ShowDialog(this) == DialogResult.OK)
                 {
-                    filePath = openFile.FileName;
+                    filePath = openFileDialog.FileName;
                     textBoxApp.Text = filePath;
                 }
             }
@@ -155,11 +148,7 @@ namespace WaitForService
 
         private void SetOKbuttonStatus()
         {
-            if (string.IsNullOrEmpty(comboBoxService.Text) || 
-                string.IsNullOrEmpty(textBoxApp.Text) || 
-                string.IsNullOrEmpty(comboBoxStartup.Text) //||
-                //(checkBoxRunatLogon.Checked == true && comboBoxUser.SelectedIndex == -1)
-                )
+            if (string.IsNullOrEmpty(comboBoxService.Text) || string.IsNullOrEmpty(textBoxApp.Text) || string.IsNullOrEmpty(comboBoxStartup.Text))
             {
                 buttonOK.Enabled = false;
             }
@@ -167,62 +156,6 @@ namespace WaitForService
             {
                 buttonOK.Enabled = true;
             }
-        }
-
-        private void checkBoxRunatLogon_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxRunatLogon.Checked == false)
-            {
-                comboBoxUser.SelectedIndex = -1;
-            }
-            comboBoxUser.Enabled = checkBoxRunatLogon.Checked;
-            label4.Enabled = checkBoxRunatLogon.Checked;
-            runatLogon = checkBoxRunatLogon.Checked;
-            SetOKbuttonStatus();
-        }
-
-        private void SetStartupUser()
-        {
-            const string REGISTRY_ROOT = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\";
-
-            profiles.Add("All Users", ".DEFAULT");
-            using (RegistryKey rootKey = Registry.LocalMachine.OpenSubKey(REGISTRY_ROOT))
-            {
-                string[] profileSIDs = rootKey.GetSubKeyNames();
-                foreach (string currSID in profileSIDs)
-                {
-                    if (currSID.StartsWith("S-1-5-21"))
-                    {
-                        using (RegistryKey currSubKey = Registry.LocalMachine.OpenSubKey(REGISTRY_ROOT + currSID))
-                        {
-                            string value = currSubKey.GetValue("ProfileImagePath").ToString();
-                            string[] path = value.Split('\\');
-                            string username = path[path.Length - 1];
-                            profiles.Add(username, currSID);
-                            currSubKey.Close();
-                        }
-                    }
-                }
-                rootKey.Close();
-            }
-            foreach (string key in profiles.Keys)
-            {
-                comboBoxUser.Items.Add(key);
-            }
-        }
-
-        private void comboBoxUser_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBoxUser.SelectedItem != null)
-            {
-                runatLogonUser = profiles[comboBoxUser.SelectedItem.ToString()];
-            }
-            else
-            {
-                runatLogonUser = "";
-                checkBoxRunatLogon.Checked = false;
-            }
-            SetOKbuttonStatus();
         }
     }
 }

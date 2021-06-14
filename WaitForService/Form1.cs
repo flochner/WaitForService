@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.ServiceProcess;
 using System.Threading;
 using System.ComponentModel;
@@ -99,26 +98,15 @@ namespace WaitForService
 
         private bool LoadSaveSettings()
         {
-
             XDocument xDoc;
-            string configPath;
-            string appPath;
-            string appRoot = @"SOFTWARE\WOW6432Node\ConRes\WaitForService\";
-
-            using (RegistryKey rootKey = Registry.LocalMachine.OpenSubKey(appRoot))
-            {
-                configPath = rootKey.GetValue("ConfigPath").ToString();
-                rootKey.Close();
-            }
-
             try
-            {
-                xDoc = XDocument.Load(configPath + "config.xml");
+            { 
+                xDoc = XDocument.Load("config.xml"); 
             }
             catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, ex.Source);
-                return false;
+            { 
+                MessageBox.Show(ex.Message, ex.Source); 
+                return false; 
             }
 
             XElement elSvc = xDoc.Root.Element("Service");
@@ -146,25 +134,7 @@ namespace WaitForService
                         elSvc.Value = serviceName;
                         elApp.Value = appName;
                         elStart.Value = appStart;
-                        //xDoc.Save(configPath + "config.xml");
-
-                        if (settings.RunatLogon == true)
-                        {
-                            string runRoot = settings.RunatLogonUser + @"\SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
-
-                            using (RegistryKey rootKey = Registry.LocalMachine.OpenSubKey(appRoot))
-                            {
-                                appPath = rootKey.GetValue("AppPath").ToString();
-                                rootKey.SetValue("Test Name", "Text Data");
-                                rootKey.Close();
-                            }
-
-                            using (RegistryKey rootKey = Registry.Users.OpenSubKey(runRoot, true))
-                            {
-                                rootKey.SetValue("WaitForService", appPath);
-                                rootKey.Close();
-                            }
-                        }
+                        xDoc.Save("config.xml");
                     }
                 }
                 else
