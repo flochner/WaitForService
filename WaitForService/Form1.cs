@@ -114,11 +114,14 @@ namespace WaitForService
 
                 if (settings.DialogResult == DialogResult.OK)
                 {
+                    serviceName = settings.ServiceName;
+                    appName = settings.AppName;
+                    appVis = settings.AppVis;
                     if (settings.SaveSettings)
                     {
-                        regKeyConfig.SetValue("Service", settings.ServiceName);
-                        regKeyConfig.SetValue("Application", settings.AppName);
-                        regKeyConfig.SetValue("Visibility", settings.AppVis);
+                        regKeyConfig.SetValue("Service", serviceName);
+                        regKeyConfig.SetValue("Application", appName);
+                        regKeyConfig.SetValue("Visibility", appVis);
                     }
                 }
                 else
