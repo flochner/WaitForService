@@ -10,6 +10,7 @@ namespace WaitForService
     public partial class Form2 : Form
     {
         public bool SaveSettings { get => checkBoxSave.Checked; }
+        public bool RunAtLogon { get => checkBoxRunAtLogon.Checked; }
         public string AppName { get => textBoxApp.Text; }
         public string AppVis { get => comboBoxVisibility.SelectedIndex.ToString(); }
         public string ServiceName { get => comboBoxService.Text; }

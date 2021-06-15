@@ -39,6 +39,7 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.checkBoxMSsvcs = new System.Windows.Forms.CheckBox();
             this.checkBoxSave = new System.Windows.Forms.CheckBox();
+            this.checkBoxRunAtLogon = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -96,7 +97,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(27, 69);
+            this.label3.Location = new System.Drawing.Point(25, 69);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 0;
@@ -122,7 +123,7 @@
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Enabled = false;
-            this.buttonOK.Location = new System.Drawing.Point(371, 114);
+            this.buttonOK.Location = new System.Drawing.Point(371, 116);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 5;
@@ -133,7 +134,7 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(452, 114);
+            this.buttonCancel.Location = new System.Drawing.Point(452, 116);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 6;
@@ -143,7 +144,7 @@
             // checkBoxMSsvcs
             // 
             this.checkBoxMSsvcs.AutoSize = true;
-            this.checkBoxMSsvcs.Location = new System.Drawing.Point(373, 15);
+            this.checkBoxMSsvcs.Location = new System.Drawing.Point(372, 14);
             this.checkBoxMSsvcs.Name = "checkBoxMSsvcs";
             this.checkBoxMSsvcs.Size = new System.Drawing.Size(136, 17);
             this.checkBoxMSsvcs.TabIndex = 7;
@@ -155,18 +156,30 @@
             // 
             this.checkBoxSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxSave.AutoSize = true;
-            this.checkBoxSave.Location = new System.Drawing.Point(74, 114);
+            this.checkBoxSave.Location = new System.Drawing.Point(74, 120);
             this.checkBoxSave.Name = "checkBoxSave";
             this.checkBoxSave.Size = new System.Drawing.Size(90, 17);
             this.checkBoxSave.TabIndex = 8;
             this.checkBoxSave.Text = "Save settings";
             this.checkBoxSave.UseVisualStyleBackColor = true;
             // 
+            // checkBoxRunAtLogon
+            // 
+            this.checkBoxRunAtLogon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxRunAtLogon.AutoSize = true;
+            this.checkBoxRunAtLogon.Location = new System.Drawing.Point(74, 97);
+            this.checkBoxRunAtLogon.Name = "checkBoxRunAtLogon";
+            this.checkBoxRunAtLogon.Size = new System.Drawing.Size(146, 17);
+            this.checkBoxRunAtLogon.TabIndex = 9;
+            this.checkBoxRunAtLogon.Text = "Run at current user logon";
+            this.checkBoxRunAtLogon.UseVisualStyleBackColor = true;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 149);
+            this.ClientSize = new System.Drawing.Size(539, 151);
+            this.Controls.Add(this.checkBoxRunAtLogon);
             this.Controls.Add(this.checkBoxSave);
             this.Controls.Add(this.checkBoxMSsvcs);
             this.Controls.Add(this.buttonCancel);
@@ -200,5 +213,6 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.CheckBox checkBoxMSsvcs;
         private System.Windows.Forms.CheckBox checkBoxSave;
+        private System.Windows.Forms.CheckBox checkBoxRunAtLogon;
     }
 }
