@@ -4,7 +4,7 @@ using System.Threading;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
-using System.Xml.Linq;
+using Microsoft.Win32;
 
 namespace WaitForService
 {
@@ -98,24 +98,12 @@ namespace WaitForService
 
         private bool LoadSaveSettings()
         {
-            XDocument xDoc;
-            try
-            { 
-                xDoc = XDocument.Load("config.xml"); 
-            }
-            catch (Exception ex)
-            { 
-                MessageBox.Show(ex.Message, ex.Source); 
-                return false; 
-            }
+            bool configComplete = true;
+            RegistryKey regKeyConfig = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ConRes\WaitForService", true);
 
-            XElement elSvc = xDoc.Root.Element("Service");
-            XElement elApp = xDoc.Root.Element("Application");
-            XElement elVis = xDoc.Root.Element("ApplicationVisibility");
-
-            serviceName = elSvc.Value;
-            appName = elApp.Value;
-            appVis = elVis.Value;
+            serviceName = (string)regKeyConfig.GetValue("Service");
+            appName = (string)regKeyConfig.GetValue("Application");
+            appVis = (string)regKeyConfig.GetValue("Visibility");
 
             if (string.IsNullOrEmpty(serviceName) ||
                 string.IsNullOrEmpty(appName) ||
@@ -131,19 +119,19 @@ namespace WaitForService
                     appVis = settings.AppVis;
                     if (settings.SaveSettings)
                     {
-                        elSvc.Value = serviceName;
-                        elApp.Value = appName;
-                        elVis.Value = appVis;
-                        xDoc.Save("config.xml");
+                        regKeyConfig.SetValue("Service", serviceName);
+                        regKeyConfig.SetValue("Application", appName);
+                        regKeyConfig.SetValue("Visibility", appVis);
                     }
                 }
                 else
                 {
-                    return false;
+                    configComplete = false;
                 }
                 settings.Dispose();
             }
-            return true;
+            regKeyConfig.Close();
+            return configComplete;
         }
 
         private string GetStatus(string serviceName)
