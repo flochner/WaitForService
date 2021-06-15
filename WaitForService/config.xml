@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
-  <Service></Service>
-  <Application></Application>
-  <!-- Normal=0, Hidden=1, Minimized=2, Maximized=3 -->
-  <ApplicationVisibility></ApplicationVisibility>
-</configuration>
