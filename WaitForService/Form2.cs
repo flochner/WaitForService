@@ -1,21 +1,20 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.ServiceProcess;
 using System.Windows.Forms;
-
+using Microsoft.Win32;
 
 namespace WaitForService
 {
     public partial class Form2 : Form
     {
-        public bool SaveSettings { get => saveSettings; }
-        public string AppName { get => appName; }
-        public string AppVis { get => appVis; }
-        public string ServiceName { get => serviceName; }
+        public bool RunAtLogon { get => checkBoxRunAtLogon.Checked; }
+        public bool SaveSettings { get => checkBoxSave.Checked; }
+        public string AppName { get => textBoxApp.Text; }
+        public string AppVis { get => comboBoxVisibility.SelectedIndex.ToString(); }
+        public string ServiceName { get => comboBoxService.Text; }
 
-        private bool saveSettings;
         private string appName;
         private string appVis;
         private string serviceName;
@@ -66,19 +65,6 @@ namespace WaitForService
                 if (service.ServiceName == this.serviceName)
                     comboBoxService.SelectedItem = service.ServiceName;
             }
-        }
-
-        private void buttonOK_Click(object sender, EventArgs e)
-        {
-            serviceName = comboBoxService.Text;
-            appName = textBoxApp.Text;
-            appVis = comboBoxVisibility.SelectedIndex.ToString();
-            saveSettings = checkBoxSave.Checked;
-        }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonBrowse_Click(object sender, EventArgs e)
@@ -148,14 +134,9 @@ namespace WaitForService
 
         private void SetOKbuttonStatus()
         {
-            if (string.IsNullOrEmpty(comboBoxService.Text) || string.IsNullOrEmpty(textBoxApp.Text) || string.IsNullOrEmpty(comboBoxVisibility.Text))
-            {
-                buttonOK.Enabled = false;
-            }
-            else
-            {
-                buttonOK.Enabled = true;
-            }
+            buttonOK.Enabled = !string.IsNullOrEmpty(comboBoxService.Text) &&
+                               !string.IsNullOrEmpty(textBoxApp.Text) &&
+                               !string.IsNullOrEmpty(comboBoxVisibility.Text);
         }
     }
 }

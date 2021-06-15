@@ -39,6 +39,7 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.checkBoxMSsvcs = new System.Windows.Forms.CheckBox();
             this.checkBoxSave = new System.Windows.Forms.CheckBox();
+            this.checkBoxRunAtLogon = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -122,25 +123,23 @@
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Enabled = false;
-            this.buttonOK.Location = new System.Drawing.Point(361, 89);
+            this.buttonOK.Location = new System.Drawing.Point(372, 117);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 5;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(442, 89);
+            this.buttonCancel.Location = new System.Drawing.Point(453, 117);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 6;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // checkBoxMSsvcs
             // 
@@ -155,21 +154,32 @@
             // 
             // checkBoxSave
             // 
+            this.checkBoxSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxSave.AutoSize = true;
-            this.checkBoxSave.Checked = true;
-            this.checkBoxSave.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSave.Location = new System.Drawing.Point(74, 93);
+            this.checkBoxSave.Location = new System.Drawing.Point(74, 98);
             this.checkBoxSave.Name = "checkBoxSave";
             this.checkBoxSave.Size = new System.Drawing.Size(90, 17);
             this.checkBoxSave.TabIndex = 8;
             this.checkBoxSave.Text = "Save settings";
             this.checkBoxSave.UseVisualStyleBackColor = true;
             // 
+            // checkBoxRunAtLogon
+            // 
+            this.checkBoxRunAtLogon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxRunAtLogon.AutoSize = true;
+            this.checkBoxRunAtLogon.Location = new System.Drawing.Point(74, 121);
+            this.checkBoxRunAtLogon.Name = "checkBoxRunAtLogon";
+            this.checkBoxRunAtLogon.Size = new System.Drawing.Size(153, 17);
+            this.checkBoxRunAtLogon.TabIndex = 9;
+            this.checkBoxRunAtLogon.Text = "Run at current user\'s logon";
+            this.checkBoxRunAtLogon.UseVisualStyleBackColor = true;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 124);
+            this.ClientSize = new System.Drawing.Size(540, 152);
+            this.Controls.Add(this.checkBoxRunAtLogon);
             this.Controls.Add(this.checkBoxSave);
             this.Controls.Add(this.checkBoxMSsvcs);
             this.Controls.Add(this.buttonCancel);
@@ -203,5 +213,6 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.CheckBox checkBoxMSsvcs;
         private System.Windows.Forms.CheckBox checkBoxSave;
+        private System.Windows.Forms.CheckBox checkBoxRunAtLogon;
     }
 }
