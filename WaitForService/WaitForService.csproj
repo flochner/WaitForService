@@ -123,9 +123,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Content Include="config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Properties\app.manifest" />
     <None Include="WaitForService_TemporaryKey.pfx" />
   </ItemGroup>
