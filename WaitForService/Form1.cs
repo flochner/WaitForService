@@ -11,7 +11,7 @@ namespace WaitForService
     public partial class Form1 : Form
     {
         private int exitStatus = -1;
-        private string serviceName;// = "postgresql-x64-9.3";
+        private string svcName;// = "postgresql-x64-9.3";
         private string appName;// = @"C:\Program Files (x86)\Fluke Calibration\LogWare III Client\LogWare3.exe";
         private string appVis;
 
@@ -29,12 +29,11 @@ namespace WaitForService
             int startAttempts = 0;
             string currentStatus;
 
-
-            Invoke(new MethodInvoker(() => { this.Text = serviceName; }));
+            Invoke(new MethodInvoker(() => { this.Text = svcName; }));
 
             do
             {
-                currentStatus = GetStatus(serviceName);
+                currentStatus = GetStatus(svcName);
                 switch (currentStatus)
                 {
                     case "Running":
@@ -58,7 +57,7 @@ namespace WaitForService
                         break;
                     case "Stopped":
                         Invoke(new MethodInvoker(() => { label1.Text = currentStatus; }));
-                        var svc = new ServiceController(serviceName);
+                        var svc = new ServiceController(svcName);
                         try
                         {
                             svc.Start();
@@ -75,12 +74,12 @@ namespace WaitForService
                         Thread.Sleep(10);
                         if (startAttempts++ > 10)
                         {
-                            ModalMessageBox("Too many start attempts.", serviceName);
+                            ModalMessageBox("Too many start attempts.", svcName);
                             Exit(3);
                         }
                         break;
                     default:
-                        ModalMessageBox(currentStatus, serviceName);
+                        ModalMessageBox(currentStatus, svcName);
                         Exit(4);
                         break;
                 }
@@ -89,7 +88,7 @@ namespace WaitForService
                 {
                     Thread.Sleep(10);
                     if (BackgroundWorker1.CancellationPending == true) return;
-                } while (GetStatus(serviceName).Equals(currentStatus));
+                } while (GetStatus(svcName).Equals(currentStatus));
 
                 Invoke(new MethodInvoker(() => { progressBar1.MarqueeAnimationSpeed = 0; }));
 
@@ -98,30 +97,41 @@ namespace WaitForService
 
         private bool LoadSaveSettings()
         {
+            string installPath;
+            bool isInCVRun;
             bool configComplete = true;
             RegistryKey regKeyConfig = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ConRes\WaitForService", true);
             RegistryKey regKeyRun = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
 
-            string installPath = (string)regKeyConfig.GetValue("wfsInstallPath");
-            serviceName = (string)regKeyConfig.GetValue("Service");
+            if (regKeyConfig == null)
+            {
+                MessageBox.Show("Please use Add/Remove Programs to Modify/Repair the installation for the current user.");
+                return false;
+            }
+
+            isInCVRun = !string.IsNullOrEmpty((string)regKeyRun.GetValue("WaitForService"));
+            installPath = (string)regKeyConfig.GetValue("wfsInstallPath");
+            svcName = (string)regKeyConfig.GetValue("Service");
             appName = (string)regKeyConfig.GetValue("Application");
             appVis = (string)regKeyConfig.GetValue("Visibility");
 
-            if (string.IsNullOrEmpty(serviceName) ||
+            if (string.IsNullOrEmpty(svcName) ||
                 string.IsNullOrEmpty(appName) ||
-                string.IsNullOrEmpty(appVis))
+                string.IsNullOrEmpty(appVis) ||
+                Control.ModifierKeys == Keys.Shift)
             {
-                Form2 settings = new Form2(serviceName, appName, appVis);
+                Thread.Sleep(1000);
+                Form2 settings = new Form2(svcName, appName, appVis, isInCVRun);
                 settings.ShowDialog();
 
                 if (settings.DialogResult == DialogResult.OK)
                 {
-                    serviceName = settings.ServiceName;
+                    svcName = settings.ServiceName;
                     appName = settings.AppName;
                     appVis = settings.AppVis;
                     if (settings.SaveSettings)
                     {
-                        regKeyConfig.SetValue("Service", serviceName);
+                        regKeyConfig.SetValue("Service", svcName);
                         regKeyConfig.SetValue("Application", appName);
                         regKeyConfig.SetValue("Visibility", appVis);
                         if (settings.RunAtLogon == false)
