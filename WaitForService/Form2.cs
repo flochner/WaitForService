@@ -17,17 +17,18 @@ namespace WaitForService
 
         private string appName;
         private string appVis;
-        private string serviceName;
+        private string svcName;
         private List<string> serviceList = new List<string>();
 
-        public Form2(string sN, string aN, string aV)
+        public Form2(string sN, string aN, string aV, bool run)
         {
             InitializeComponent();
 
-            serviceName = sN; appName = aN; appVis = aV;
-
-            comboBoxService.Text = serviceName;
+            svcName = sN; appName = aN; appVis = aV;
+            checkBoxRunAtLogon.Checked = run;
+            comboBoxService.Text = svcName;
             textBoxApp.Text = appName;
+
             if (string.IsNullOrEmpty(appVis))
                 comboBoxVisibility.SelectedIndex = -1;
             else
@@ -62,7 +63,7 @@ namespace WaitForService
                 comboBoxService.Items.Add(service.ServiceName);
                 serviceList.Add(service.DisplayName);
 
-                if (service.ServiceName == this.serviceName)
+                if (service.ServiceName == this.svcName)
                     comboBoxService.SelectedItem = service.ServiceName;
             }
         }
