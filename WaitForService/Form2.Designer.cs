@@ -92,6 +92,7 @@
             this.comboBoxService.TabIndex = 1;
             this.comboBoxService.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxService_DrawItem);
             this.comboBoxService.SelectedIndexChanged += new System.EventHandler(this.comboBoxService_SelectedIndexChanged);
+            this.comboBoxService.Leave += new System.EventHandler(this.comboBoxService_Leave);
             // 
             // label3
             // 
@@ -126,7 +127,7 @@
             this.buttonOK.Location = new System.Drawing.Point(371, 116);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 5;
+            this.buttonOK.TabIndex = 0;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             // 
@@ -147,7 +148,7 @@
             this.checkBoxMSsvcs.Location = new System.Drawing.Point(372, 14);
             this.checkBoxMSsvcs.Name = "checkBoxMSsvcs";
             this.checkBoxMSsvcs.Size = new System.Drawing.Size(136, 17);
-            this.checkBoxMSsvcs.TabIndex = 7;
+            this.checkBoxMSsvcs.TabIndex = 0;
             this.checkBoxMSsvcs.Text = "Hide Microsoft services";
             this.checkBoxMSsvcs.UseVisualStyleBackColor = true;
             this.checkBoxMSsvcs.CheckedChanged += new System.EventHandler(this.checkBoxMSsvcs_CheckedChanged);
@@ -176,8 +177,10 @@
             // 
             // Form2
             // 
+            this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(539, 151);
             this.Controls.Add(this.checkBoxRunAtLogon);
             this.Controls.Add(this.checkBoxSave);
@@ -195,6 +198,7 @@
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WaitForService - Configuration";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

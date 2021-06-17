@@ -12,7 +12,7 @@ namespace WaitForService
         public bool SaveSettings { get => checkBoxSave.Checked; }
         public bool RunAtLogon { get => checkBoxRunAtLogon.Checked; }
         public string AppName { get => textBoxApp.Text; }
-        public string AppVis { get => comboBoxVisibility.SelectedIndex.ToString(); }
+        public string AppVisibility { get => comboBoxVisibility.SelectedIndex.ToString(); }
         public string ServiceName { get => comboBoxService.Text; }
 
         private string appName;
@@ -23,18 +23,17 @@ namespace WaitForService
         public Form2(string sN, string aN, string aV, bool run)
         {
             InitializeComponent();
+            PopulateServices();
 
             svcName = sN; appName = aN; appVis = aV;
-            checkBoxRunAtLogon.Checked = run;
-            comboBoxService.Text = svcName;
-            textBoxApp.Text = appName;
 
+            comboBoxService.SelectedItem = svcName;
+            textBoxApp.Text = appName;
+            checkBoxRunAtLogon.Checked = run;
             if (string.IsNullOrEmpty(appVis))
                 comboBoxVisibility.SelectedIndex = -1;
             else
                 comboBoxVisibility.SelectedIndex = int.Parse(appVis);
-
-            PopulateServices();
         }
 
         private void PopulateServices()
@@ -44,7 +43,6 @@ namespace WaitForService
 
             comboBoxService.Items.Clear();
             serviceList.Clear();
-            this.Text = "Configuration";
 
             ServiceController[] services = ServiceController.GetServices();
 
@@ -62,9 +60,6 @@ namespace WaitForService
 
                 comboBoxService.Items.Add(service.ServiceName);
                 serviceList.Add(service.DisplayName);
-
-                if (service.ServiceName == this.svcName)
-                    comboBoxService.SelectedItem = service.ServiceName;
             }
         }
 
@@ -95,15 +90,13 @@ namespace WaitForService
         private void checkBoxMSsvcs_CheckedChanged(object sender, EventArgs e)
         {
             PopulateServices();
+            SetOKbuttonStatus();
         }
 
         private void comboBoxService_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index == -1)
-            {
-                this.Text = "Configuration";
                 return;
-            }
 
             e.DrawBackground();
 
@@ -138,6 +131,11 @@ namespace WaitForService
             buttonOK.Enabled = !string.IsNullOrEmpty(comboBoxService.Text) &&
                                !string.IsNullOrEmpty(textBoxApp.Text) &&
                                !string.IsNullOrEmpty(comboBoxVisibility.Text);
+        }
+
+        private void comboBoxService_Leave(object sender, EventArgs e)
+        {
+            this.Text = "WaitForService - Configuration";
         }
     }
 }
