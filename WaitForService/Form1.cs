@@ -115,12 +115,12 @@ namespace WaitForService
             appName = (string)regKeyConfig.GetValue("Application");
             appVis = (string)regKeyConfig.GetValue("Visibility");
 
+            Thread.Sleep(1000);
             if (string.IsNullOrEmpty(svcName) ||
                 string.IsNullOrEmpty(appName) ||
                 string.IsNullOrEmpty(appVis) ||
                 Control.ModifierKeys == Keys.Shift)
             {
-                Thread.Sleep(1000);
                 Form2 settings = new Form2(svcName, appName, appVis, isInCVRun);
                 settings.ShowDialog();
 
