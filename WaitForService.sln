@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1300
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaitForService", "WaitForService\WaitForService.csproj", "{2FAE10D9-D915-497A-9BDB-E05342CC287B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaitForService",  "WaitForService\WaitForService.csproj", "{2FAE10D9-D915-497A-9BDB-E05342CC287B}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{C49973AD-6293-471E-B998-47D8C16A31DE}"
 EndProject
