@@ -4,9 +4,9 @@ In essence, this program starts a service (if it is not already), waits until it
 
 My need for this came from a startup program I had which would launch before my PostgreSQL database was ready for connections.  
 
-A configuration file in xml format specifies the service, program, and start type (normal, minimized, maximized or hidden).  If left unconfigured or partially configured, a dialog allows selection of a service on the local computer, explorer lookup of a program, and start type, with an option to save the configuration to the xml file.
+At first run, a dialog box allows selection of a service on the local computer, explorer lookup of a program, and startup visibility (normal, maximized, minimized, or hidden).  There are also options to run at user logon and save the configuration to the current user's registry hive.
 
-Since 1.1.0, the program can be installed in the registry to run at logon for a certain user (or all users).
+Reconfiguration can be forced at any time by holding down the Shift key during start up.
 
 The service selection has an option to hide Microsoft services from the dropdown list (like msconfig), but it is not 100% accurate.  Suggestions welcome.
 
