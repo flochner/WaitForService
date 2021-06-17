@@ -68,6 +68,7 @@
             this.ClientSize = new System.Drawing.Size(244, 53);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximumSize = new System.Drawing.Size(600, 92);
             this.MinimumSize = new System.Drawing.Size(260, 92);
             this.Name = "Form1";

@@ -122,13 +122,13 @@ namespace WaitForService
                 Control.ModifierKeys == Keys.Shift)
             {
                 Form2 settings = new Form2(svcName, appName, appVis, isInCVRun);
-                settings.ShowDialog();
+                settings.ShowDialog(this);
 
                 if (settings.DialogResult == DialogResult.OK)
                 {
                     svcName = settings.ServiceName;
                     appName = settings.AppName;
-                    appVis = settings.AppVis;
+                    appVis = settings.AppVisibility;
                     if (settings.SaveSettings)
                     {
                         regKeyConfig.SetValue("Service", svcName);
