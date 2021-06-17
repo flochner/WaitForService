@@ -99,7 +99,7 @@ namespace WaitForService
         {
             string installPath;
             bool isInCVRun;
-            bool configComplete = true;
+            bool configComplete = false;
             RegistryKey regKeyConfig = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ConRes\WaitForService", true);
             RegistryKey regKeyRun = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
 
@@ -144,13 +144,11 @@ namespace WaitForService
                             regKeyRun.SetValue("WaitForService", installPath);
                         }
                     }
-                }
-                else
-                {
-                    configComplete = false;
+                    configComplete = true;
                 }
                 settings.Dispose();
             }
+            regKeyRun.Close();
             regKeyConfig.Close();
             return configComplete;
         }
