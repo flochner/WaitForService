@@ -120,6 +120,7 @@ namespace WaitForService
                 string.IsNullOrEmpty(appVis) ||
                 Control.ModifierKeys == Keys.Shift)
             {
+                Thread.Sleep(1000);
                 Form2 settings = new Form2(svcName, appName, appVis, isInCVRun);
                 settings.ShowDialog();
 
