@@ -1,10 +1,10 @@
-﻿using System;
-using System.ServiceProcess;
-using System.Threading;
+﻿using Microsoft.Win32;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.ServiceProcess;
+using System.Threading;
 using System.Windows.Forms;
-using Microsoft.Win32;
 
 namespace WaitForService
 {
@@ -181,7 +181,7 @@ namespace WaitForService
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
-            { 
+            {
                 BackgroundWorker1.CancelAsync();
             }
         }

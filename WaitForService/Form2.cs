@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.ServiceProcess;
 using System.Windows.Forms;
-using Microsoft.Win32;
 
 namespace WaitForService
 {
