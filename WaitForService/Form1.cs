@@ -114,10 +114,10 @@ namespace WaitForService
                     if (config.ExitCode == 0)
                         return false;
                 }
+                svcName = (string)regKeyConfig.GetValue("Service");
+                appName = (string)regKeyConfig.GetValue("Application");
+                appVis = (string)regKeyConfig.GetValue("Visibility");
             }
-            svcName = (string)regKeyConfig.GetValue("Service");
-            appName = (string)regKeyConfig.GetValue("Application");
-            appVis = (string)regKeyConfig.GetValue("Visibility");
 
             regKeyConfig.Close();
             return true;
