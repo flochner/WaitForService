@@ -170,9 +170,9 @@
             this.checkBoxRunAtLogon.AutoSize = true;
             this.checkBoxRunAtLogon.Location = new System.Drawing.Point(74, 97);
             this.checkBoxRunAtLogon.Name = "checkBoxRunAtLogon";
-            this.checkBoxRunAtLogon.Size = new System.Drawing.Size(146, 17);
+            this.checkBoxRunAtLogon.Size = new System.Drawing.Size(87, 17);
             this.checkBoxRunAtLogon.TabIndex = 9;
-            this.checkBoxRunAtLogon.Text = "Run at current user logon";
+            this.checkBoxRunAtLogon.Text = "Run at logon";
             this.checkBoxRunAtLogon.UseVisualStyleBackColor = true;
             // 
             // Form2
