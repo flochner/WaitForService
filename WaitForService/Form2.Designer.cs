@@ -58,7 +58,7 @@
             this.textBoxApp.Name = "textBoxApp";
             this.textBoxApp.Size = new System.Drawing.Size(292, 20);
             this.textBoxApp.TabIndex = 2;
-            this.textBoxApp.TextChanged += new System.EventHandler(this.textBoxApp_TextChanged);
+            this.textBoxApp.TextChanged += new System.EventHandler(this.TextBoxApp_TextChanged);
             // 
             // buttonBrowse
             // 
@@ -68,7 +68,7 @@
             this.buttonBrowse.TabIndex = 3;
             this.buttonBrowse.Text = "Browse ...";
             this.buttonBrowse.UseVisualStyleBackColor = true;
-            this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
+            this.buttonBrowse.Click += new System.EventHandler(this.ButtonBrowse_Click);
             // 
             // label2
             // 
@@ -90,9 +90,9 @@
             this.comboBoxService.Name = "comboBoxService";
             this.comboBoxService.Size = new System.Drawing.Size(292, 21);
             this.comboBoxService.TabIndex = 1;
-            this.comboBoxService.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxService_DrawItem);
-            this.comboBoxService.SelectedIndexChanged += new System.EventHandler(this.comboBoxService_SelectedIndexChanged);
-            this.comboBoxService.Leave += new System.EventHandler(this.comboBoxService_Leave);
+            this.comboBoxService.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ComboBoxService_DrawItem);
+            this.comboBoxService.SelectedIndexChanged += new System.EventHandler(this.ComboBoxService_SelectedIndexChanged);
+            this.comboBoxService.Leave += new System.EventHandler(this.ComboBoxService_Leave);
             // 
             // label3
             // 
@@ -117,7 +117,7 @@
             this.comboBoxVisibility.Name = "comboBoxVisibility";
             this.comboBoxVisibility.Size = new System.Drawing.Size(121, 21);
             this.comboBoxVisibility.TabIndex = 4;
-            this.comboBoxVisibility.SelectedIndexChanged += new System.EventHandler(this.comboBoxVisibility_SelectedIndexChanged);
+            this.comboBoxVisibility.SelectedIndexChanged += new System.EventHandler(this.ComboBoxVisibility_SelectedIndexChanged);
             // 
             // buttonOK
             // 
@@ -151,7 +151,7 @@
             this.checkBoxMSsvcs.TabIndex = 0;
             this.checkBoxMSsvcs.Text = "Hide Microsoft services";
             this.checkBoxMSsvcs.UseVisualStyleBackColor = true;
-            this.checkBoxMSsvcs.CheckedChanged += new System.EventHandler(this.checkBoxMSsvcs_CheckedChanged);
+            this.checkBoxMSsvcs.CheckedChanged += new System.EventHandler(this.CheckBoxMSsvcs_CheckedChanged);
             // 
             // checkBoxSave
             // 
