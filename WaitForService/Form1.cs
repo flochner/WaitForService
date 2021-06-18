@@ -99,15 +99,9 @@ namespace WaitForService
         {
             string installPath;
             bool isInCVRun;
-            bool configComplete = false;
-            RegistryKey regKeyConfig = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ConRes\WaitForService", true);
-            RegistryKey regKeyRun = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
-
-            if (regKeyConfig == null)
-            {
-                MessageBox.Show("Please use Add/Remove Programs to Modify/Repair the installation for the current user.");
-                return false;
-            }
+            bool configComplete = true;
+            RegistryKey regKeyConfig = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\ConRes\WaitForService", true);
+            RegistryKey regKeyRun = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
 
             isInCVRun = !string.IsNullOrEmpty((string)regKeyRun.GetValue("WaitForService"));
             installPath = (string)regKeyConfig.GetValue("wfsInstallPath");
@@ -135,16 +129,15 @@ namespace WaitForService
                         regKeyConfig.SetValue("Application", appName);
                         regKeyConfig.SetValue("Visibility", appVis);
                         if (settings.RunAtLogon == false)
-                        {
                             try { regKeyRun.DeleteValue("WaitForService"); }
                             catch { }
-                        }
                         else
-                        {
                             regKeyRun.SetValue("WaitForService", installPath);
-                        }
                     }
-                    configComplete = true;
+                }
+                else
+                {
+                    configComplete = false;
                 }
                 settings.Dispose();
             }
