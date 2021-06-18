@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.ServiceProcess;
 using System.Windows.Forms;
-using Microsoft.Win32;
 
 namespace WaitForService
 {
@@ -15,17 +15,12 @@ namespace WaitForService
         public string AppVisibility { get => comboBoxVisibility.SelectedIndex.ToString(); }
         public string ServiceName { get => comboBoxService.Text; }
 
-        private string appName;
-        private string appVis;
-        private string svcName;
-        private List<string> serviceList = new List<string>();
+        private readonly List<string> serviceList = new List<string>();
 
-        public Form2(string sN, string aN, string aV, bool run)
+        public Form2(string svcName, string appName, string appVis, bool run)
         {
             InitializeComponent();
             PopulateServices();
-
-            svcName = sN; appName = aN; appVis = aV;
 
             comboBoxService.SelectedItem = svcName;
             textBoxApp.Text = appName;
@@ -63,37 +58,39 @@ namespace WaitForService
             }
         }
 
-        private void buttonBrowse_Click(object sender, EventArgs e)
+        private void ButtonBrowse_Click(object sender, EventArgs e)
         {
             string filePath;
 
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.InitialDirectory = @"C:\Program Files";
-            openFile.Filter = "Programs (*.exe;*.com)|*.exe;*.com|Batch Files (*.bat;*.cmd)|*.bat;*.cmd|All files (*.*)|*.*";
-            openFile.FilterIndex = 1;
-            openFile.RestoreDirectory = true;
-            try
+            using (OpenFileDialog openFile = new OpenFileDialog())
             {
-                if (openFile.ShowDialog(this) == DialogResult.OK)
+                openFile.InitialDirectory = @"C:\Program Files";
+                openFile.Filter = "Programs (*.exe;*.com)|*.exe;*.com|Batch Files (*.bat;*.cmd)|*.bat;*.cmd|All files (*.*)|*.*";
+                openFile.FilterIndex = 1;
+                openFile.RestoreDirectory = true;
+                try
                 {
-                    filePath = openFile.FileName;
-                    textBoxApp.Text = filePath;
+                    if (openFile.ShowDialog(this) == DialogResult.OK)
+                    {
+                        filePath = openFile.FileName;
+                        textBoxApp.Text = filePath;
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, ex.Source);
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.Source);
+                }
             }
 
         }
 
-        private void checkBoxMSsvcs_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxMSsvcs_CheckedChanged(object sender, EventArgs e)
         {
             PopulateServices();
             SetOKbuttonStatus();
         }
 
-        private void comboBoxService_DrawItem(object sender, DrawItemEventArgs e)
+        private void ComboBoxService_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index == -1)
                 return;
@@ -111,17 +108,17 @@ namespace WaitForService
             }
         }
 
-        private void comboBoxService_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxService_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetOKbuttonStatus();
         }
 
-        private void textBoxApp_TextChanged(object sender, EventArgs e)
+        private void TextBoxApp_TextChanged(object sender, EventArgs e)
         {
             SetOKbuttonStatus();
         }
 
-        private void comboBoxVisibility_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxVisibility_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetOKbuttonStatus();
         }
@@ -133,7 +130,7 @@ namespace WaitForService
                                !string.IsNullOrEmpty(comboBoxVisibility.Text);
         }
 
-        private void comboBoxService_Leave(object sender, EventArgs e)
+        private void ComboBoxService_Leave(object sender, EventArgs e)
         {
             this.Text = "WaitForService - Configuration";
         }
