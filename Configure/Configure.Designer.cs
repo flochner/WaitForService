@@ -164,7 +164,7 @@
             this.checkBoxRunAtLogon.Text = "Run at logon";
             this.checkBoxRunAtLogon.UseVisualStyleBackColor = true;
             // 
-            // Form2
+            // Configure
             // 
             this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -183,7 +183,7 @@
             this.Controls.Add(this.textBoxApp);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Form2";
+            this.Name = "Configure";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WaitForService - Configuration";
             this.TopMost = true;

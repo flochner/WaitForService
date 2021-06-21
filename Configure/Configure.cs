@@ -26,15 +26,12 @@ namespace Configure
             bool isInCVRun = !string.IsNullOrEmpty((string)regKeyRun.GetValue("WaitForService"));
             string svcName = (string)regKeyConfig.GetValue("Service");
             string appName = (string)regKeyConfig.GetValue("Application");
-            string appVis = (string)regKeyConfig.GetValue("Visibility");
+            int appVis = (int)regKeyConfig.GetValue("Visibility");
 
             comboBoxService.SelectedItem = svcName;
             textBoxApp.Text = appName;
             checkBoxRunAtLogon.Checked = isInCVRun;
-            if (string.IsNullOrEmpty(appVis))
-                comboBoxVisibility.SelectedIndex = -1;
-            else
-                comboBoxVisibility.SelectedIndex = int.Parse(appVis);
+            comboBoxVisibility.SelectedIndex = appVis;
 
             regKeyRun.Close();
             regKeyConfig.Close();

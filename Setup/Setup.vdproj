@@ -28,12 +28,12 @@
         "Entry"
         {
         "MsmKey" = "8:_B2B61758A27FD99807207E97A31DD026"
-        "OwnerKey" = "8:_EE5B6FD766514DA58FBA516E91B5F1A4"
+        "OwnerKey" = "8:_C8C629F7D71444208885924BD5BEA384"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_EE5B6FD766514DA58FBA516E91B5F1A4"
+        "MsmKey" = "8:_C8C629F7D71444208885924BD5BEA384"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -46,7 +46,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EE5B6FD766514DA58FBA516E91B5F1A4"
+        "OwnerKey" = "8:_C8C629F7D71444208885924BD5BEA384"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -127,6 +127,21 @@
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_2C68E6142ED64B0390C9F58CAFA219B4"
+            {
+            "Name" = "8:Primary output from Configure (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_C8C629F7D71444208885924BD5BEA384"
+            "FileType" = "3:2"
+            "InstallAction" = "3:2"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_7975FEC3_820C_4936_B047_0DA73FDFF6CA"
+            "InstallerClass" = "11:FALSE"
+            "CustomActionData" = "8:"
+            "Run64Bit" = "11:TRUE"
+            }
         }
         "DefaultFeature"
         {
@@ -238,7 +253,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WaitForService"
         "ProductCode" = "8:{FFEDE12B-6A88-4B28-983C-A26ED4256A16}"
-        "PackageCode" = "8:{8D6DEDA2-C557-4133-85A3-A5540796216D}"
+        "PackageCode" = "8:{C4364AD7-F493-4D05-B46B-B703DF394D66}"
         "UpgradeCode" = "8:{EB6D39FA-9B1D-4DA4-A693-C0AED7116317}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -372,14 +387,6 @@
                                             "ValueTypes" = "3:1"
                                             "Value" = "8:[TARGETDIR][ProductName].exe"
                                             }
-                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_6E6BDAF32EC546F990F9BFBC54C38030"
-                                            {
-                                            "Name" = "8:Visibility"
-                                            "Condition" = "8:"
-                                            "Transitive" = "11:FALSE"
-                                            "ValueTypes" = "3:1"
-                                            "Value" = "8:"
-                                            }
                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_8C6EAD0341514C32B1F2C8755FA442DF"
                                             {
                                             "Name" = "8:Service"
@@ -395,6 +402,14 @@
                                             "Transitive" = "11:FALSE"
                                             "ValueTypes" = "3:1"
                                             "Value" = "8:"
+                                            }
+                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_ED192B8320E54F2D9665A7D0539BBF58"
+                                            {
+                                            "Name" = "8:Visibility"
+                                            "Condition" = "8:"
+                                            "Transitive" = "11:FALSE"
+                                            "ValueTypes" = "3:3"
+                                            "Value" = "3:-1"
                                             }
                                         }
                                     }
@@ -784,7 +799,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A8128C376E0B4A33B90213D0258E287D"
             {
-            "SourcePath" = "8:..\\WaitForService\\obj\\Release\\WaitForService.exe"
+            "SourcePath" = "8:..\\WaitForService\\obj\\x64\\Release\\WaitForService.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B746A60F5E36422BA39B7DE0EDCC392D"
@@ -810,9 +825,9 @@
                 {
                 }
             }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EE5B6FD766514DA58FBA516E91B5F1A4"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_C8C629F7D71444208885924BD5BEA384"
             {
-            "SourcePath" = "8:..\\Configure\\obj\\Debug\\Configure.exe"
+            "SourcePath" = "8:..\\Configure\\obj\\x64\\Release\\Configure.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B746A60F5E36422BA39B7DE0EDCC392D"
