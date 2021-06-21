@@ -11,17 +11,14 @@ namespace WaitForService
     public partial class WaitForService : Form
     {
         private int exitStatus = -1;
+        private int appVis;
         private string svcName;// = "postgresql-x64-9.3";
         private string appName;// = @"C:\Program Files (x86)\Fluke Calibration\LogWare III Client\LogWare3.exe";
-        private string appVis;
 
         public WaitForService()
         {
             InitializeComponent();
-            if (LoadSettings() == true)
-                BackgroundWorker1.RunWorkerAsync();
-            else
-                Environment.Exit(exitStatus);
+            BackgroundWorker1.RunWorkerAsync();
         }
 
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -31,8 +28,14 @@ namespace WaitForService
 
             Invoke(new MethodInvoker(() => { this.Text = svcName; }));
 
+            if (LoadSettings() == false)
+                BackgroundWorker1.CancelAsync();
+            Thread.Sleep(10);
+
             do
             {
+                if (BackgroundWorker1.CancellationPending == true) return;
+
                 currentStatus = GetStatus(svcName);
                 switch (currentStatus)
                 {
@@ -43,7 +46,7 @@ namespace WaitForService
                             ProcessStartInfo startInfo = new ProcessStartInfo
                             {
                                 FileName = appName,
-                                WindowStyle = (ProcessWindowStyle)int.Parse(appVis)
+                                WindowStyle = (ProcessWindowStyle)appVis
                             };
                             Process.Start(startInfo);
                         }
@@ -100,12 +103,12 @@ namespace WaitForService
             RegistryKey regKeyConfig = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\ConRes\WaitForService");
             svcName = (string)regKeyConfig.GetValue("Service");
             appName = (string)regKeyConfig.GetValue("Application");
-            appVis = (string)regKeyConfig.GetValue("Visibility");
+            appVis = (int)regKeyConfig.GetValue("Visibility");
             
             Thread.Sleep(1000);
             if (string.IsNullOrEmpty(svcName) ||
                 string.IsNullOrEmpty(appName) ||
-                string.IsNullOrEmpty(appVis) ||
+                appVis < 0 ||
                 Control.ModifierKeys == Keys.Shift)
             {
                 using (Process config = Process.Start("Configure.exe"))
@@ -116,7 +119,7 @@ namespace WaitForService
                 }
                 svcName = (string)regKeyConfig.GetValue("Service");
                 appName = (string)regKeyConfig.GetValue("Application");
-                appVis = (string)regKeyConfig.GetValue("Visibility");
+                appVis = (int)regKeyConfig.GetValue("Visibility");
             }
 
             regKeyConfig.Close();
@@ -155,7 +158,7 @@ namespace WaitForService
             Environment.Exit(exitStatus);
         }
 
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        private void WaitForService_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {

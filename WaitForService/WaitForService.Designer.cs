@@ -61,7 +61,7 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Please Wait...";
             // 
-            // Form1
+            // WaitForService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -71,12 +71,12 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximumSize = new System.Drawing.Size(600, 92);
             this.MinimumSize = new System.Drawing.Size(260, 92);
-            this.Name = "Form1";
+            this.Name = "WaitForService";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.WaitForService_KeyUp);
             this.ResumeLayout(false);
 
         }
