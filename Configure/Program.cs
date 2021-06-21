@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WaitForService
+namespace Configure
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace WaitForService
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new WaitForService());
+            Application.Run(new Configure());
         }
     }
 }

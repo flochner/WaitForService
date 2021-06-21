@@ -5,30 +5,36 @@ using System.Drawing;
 using System.ServiceProcess;
 using System.Windows.Forms;
 
-namespace WaitForService
+namespace Configure
 {
-    public partial class Form2 : Form
+    public partial class Configure : Form
     {
-        public bool SaveSettings { get => checkBoxSave.Checked; }
-        public bool RunAtLogon { get => checkBoxRunAtLogon.Checked; }
-        public string AppName { get => textBoxApp.Text; }
-        public string AppVisibility { get => comboBoxVisibility.SelectedIndex.ToString(); }
-        public string ServiceName { get => comboBoxService.Text; }
-
         private readonly List<string> serviceList = new List<string>();
 
-        public Form2(string svcName, string appName, string appVis, bool run)
+        public Configure()
         {
             InitializeComponent();
             PopulateServices();
+            LoadSettings();
+        }
+
+        private void LoadSettings()
+        {
+            RegistryKey regKeyConfig = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\ConRes\WaitForService");
+            RegistryKey regKeyRun = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
+
+            bool isInCVRun = !string.IsNullOrEmpty((string)regKeyRun.GetValue("WaitForService"));
+            string svcName = (string)regKeyConfig.GetValue("Service");
+            string appName = (string)regKeyConfig.GetValue("Application");
+            int appVis = (int)regKeyConfig.GetValue("Visibility");
 
             comboBoxService.SelectedItem = svcName;
             textBoxApp.Text = appName;
-            checkBoxRunAtLogon.Checked = run;
-            if (string.IsNullOrEmpty(appVis))
-                comboBoxVisibility.SelectedIndex = -1;
-            else
-                comboBoxVisibility.SelectedIndex = int.Parse(appVis);
+            checkBoxRunAtLogon.Checked = isInCVRun;
+            comboBoxVisibility.SelectedIndex = appVis;
+
+            regKeyRun.Close();
+            regKeyConfig.Close();
         }
 
         private void PopulateServices()
@@ -133,6 +139,31 @@ namespace WaitForService
         private void ComboBoxService_Leave(object sender, EventArgs e)
         {
             this.Text = "WaitForService - Configuration";
+        }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            RegistryKey regKeyConfig = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\ConRes\WaitForService", true);
+            RegistryKey regKeyRun = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+
+            regKeyConfig.SetValue("Service", comboBoxService.SelectedItem);
+            regKeyConfig.SetValue("Application", textBoxApp.Text);
+            regKeyConfig.SetValue("Visibility", comboBoxVisibility.SelectedIndex);
+            if (checkBoxRunAtLogon.Checked == true)
+                regKeyRun.SetValue("WaitForService", (string)regKeyConfig.GetValue("wfsInstallPath"));
+            else
+                try { regKeyRun.DeleteValue("WaitForService"); }
+                catch { }
+
+            regKeyRun.Close();
+            regKeyConfig.Close();
+
+            Environment.Exit(0);
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(-1);
         }
     }
 }

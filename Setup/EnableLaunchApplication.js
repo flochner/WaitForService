@@ -1,4 +1,11 @@
-// EnableLaaunchApplication.js <msi-file>
+
+
+// put in post-build event
+// CALL cscript.exe "$(ProjectDir)EnableLaunchApplication.js" "$(BuiltOuputPath)"
+
+
+
+// EnableLaunchApplication.js <msi-file>
 // Performs a post-build fixup of an msi to launch a specific file when the install has completed
 
 

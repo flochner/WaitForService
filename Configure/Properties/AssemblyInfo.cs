@@ -1,15 +1,15 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WaitForService")]
+[assembly: AssemblyTitle("Configure")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ConRes")]
-[assembly: AssemblyProduct("WaitForService")]
+[assembly: AssemblyProduct("Configure")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("de433774-5988-479b-af06-321ea956c1ea")]
+[assembly: Guid("295ada7a-33e5-4cc4-99e4-9ecf85b4785b")]
 
 // Version information for an assembly consists of the following four values:
 //
