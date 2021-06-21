@@ -1,6 +1,6 @@
 ﻿namespace WaitForService
 {
-    partial class Form1
+    partial class WaitForService
     {
         /// <summary>
         /// Required designer variable.

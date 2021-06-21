@@ -177,7 +177,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -238,7 +238,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WaitForService"
         "ProductCode" = "8:{FFEDE12B-6A88-4B28-983C-A26ED4256A16}"
-        "PackageCode" = "8:{C977F6A8-7707-46C3-A9AC-4E0F3A99D9E8}"
+        "PackageCode" = "8:{8D6DEDA2-C557-4133-85A3-A5540796216D}"
         "UpgradeCode" = "8:{EB6D39FA-9B1D-4DA4-A693-C0AED7116317}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -812,7 +812,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EE5B6FD766514DA58FBA516E91B5F1A4"
             {
-            "SourcePath" = "8:..\\Configure\\obj\\Release\\Configure.exe"
+            "SourcePath" = "8:..\\Configure\\obj\\Debug\\Configure.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B746A60F5E36422BA39B7DE0EDCC392D"

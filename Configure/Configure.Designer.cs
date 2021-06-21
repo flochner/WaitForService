@@ -1,6 +1,6 @@
 ﻿namespace Configure
 {
-    partial class Form2
+    partial class Configure
     {
         /// <summary>
         /// Required designer variable.
@@ -38,7 +38,6 @@
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.checkBoxMSsvcs = new System.Windows.Forms.CheckBox();
-            this.checkBoxSave = new System.Windows.Forms.CheckBox();
             this.checkBoxRunAtLogon = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
@@ -106,7 +105,6 @@
             // 
             // comboBoxVisibility
             // 
-            this.comboBoxVisibility.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxVisibility.FormattingEnabled = true;
             this.comboBoxVisibility.Items.AddRange(new object[] {
             "Normal",
@@ -124,7 +122,7 @@
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Enabled = false;
-            this.buttonOK.Location = new System.Drawing.Point(371, 116);
+            this.buttonOK.Location = new System.Drawing.Point(355, 89);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 0;
@@ -136,12 +134,13 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(452, 116);
+            this.buttonCancel.Location = new System.Drawing.Point(436, 89);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 6;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // checkBoxMSsvcs
             // 
@@ -154,22 +153,11 @@
             this.checkBoxMSsvcs.UseVisualStyleBackColor = true;
             this.checkBoxMSsvcs.CheckedChanged += new System.EventHandler(this.CheckBoxMSsvcs_CheckedChanged);
             // 
-            // checkBoxSave
-            // 
-            this.checkBoxSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBoxSave.AutoSize = true;
-            this.checkBoxSave.Location = new System.Drawing.Point(74, 120);
-            this.checkBoxSave.Name = "checkBoxSave";
-            this.checkBoxSave.Size = new System.Drawing.Size(90, 17);
-            this.checkBoxSave.TabIndex = 8;
-            this.checkBoxSave.Text = "Save settings";
-            this.checkBoxSave.UseVisualStyleBackColor = true;
-            // 
             // checkBoxRunAtLogon
             // 
             this.checkBoxRunAtLogon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxRunAtLogon.AutoSize = true;
-            this.checkBoxRunAtLogon.Location = new System.Drawing.Point(74, 97);
+            this.checkBoxRunAtLogon.Location = new System.Drawing.Point(74, 93);
             this.checkBoxRunAtLogon.Name = "checkBoxRunAtLogon";
             this.checkBoxRunAtLogon.Size = new System.Drawing.Size(87, 17);
             this.checkBoxRunAtLogon.TabIndex = 9;
@@ -182,9 +170,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(539, 151);
+            this.ClientSize = new System.Drawing.Size(523, 124);
             this.Controls.Add(this.checkBoxRunAtLogon);
-            this.Controls.Add(this.checkBoxSave);
             this.Controls.Add(this.checkBoxMSsvcs);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
@@ -217,7 +204,6 @@
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.CheckBox checkBoxMSsvcs;
-        private System.Windows.Forms.CheckBox checkBoxSave;
         private System.Windows.Forms.CheckBox checkBoxRunAtLogon;
     }
 }

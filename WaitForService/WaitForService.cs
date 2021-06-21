@@ -8,14 +8,14 @@ using System.Windows.Forms;
 
 namespace WaitForService
 {
-    public partial class Form1 : Form
+    public partial class WaitForService : Form
     {
         private int exitStatus = -1;
         private string svcName;// = "postgresql-x64-9.3";
         private string appName;// = @"C:\Program Files (x86)\Fluke Calibration\LogWare III Client\LogWare3.exe";
         private string appVis;
 
-        public Form1()
+        public WaitForService()
         {
             InitializeComponent();
             if (LoadSettings() == true)
@@ -111,7 +111,7 @@ namespace WaitForService
                 using (Process config = Process.Start("Configure.exe"))
                 {
                     config.WaitForExit();
-                    if (config.ExitCode == 0)
+                    if (config.ExitCode != 0)
                         return false;
                 }
                 svcName = (string)regKeyConfig.GetValue("Service");

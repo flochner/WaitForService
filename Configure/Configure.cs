@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace Configure
 {
-    public partial class Form2 : Form
+    public partial class Configure : Form
     {
-        private List<string> serviceList = new List<string>();
+        private readonly List<string> serviceList = new List<string>();
 
-        public Form2()
+        public Configure()
         {
             InitializeComponent();
             PopulateServices();
@@ -146,23 +146,27 @@ namespace Configure
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            if (checkBoxSave.Checked == true)
-            {
-                RegistryKey regKeyConfig = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\ConRes\WaitForService", true);
-                RegistryKey regKeyRun = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+            RegistryKey regKeyConfig = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\ConRes\WaitForService", true);
+            RegistryKey regKeyRun = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
 
-                regKeyConfig.SetValue("Service", comboBoxService.SelectedItem);
-                regKeyConfig.SetValue("Application", textBoxApp.Text);
-                regKeyConfig.SetValue("Visibility", comboBoxVisibility.SelectedIndex);
-                if (checkBoxRunAtLogon.Checked == true)
-                    regKeyRun.SetValue("WaitForService", (string)regKeyConfig.GetValue("wfsInstallPath"));
-                else
-                    try { regKeyRun.DeleteValue("WaitForService"); }
-                    catch { }
+            regKeyConfig.SetValue("Service", comboBoxService.SelectedItem);
+            regKeyConfig.SetValue("Application", textBoxApp.Text);
+            regKeyConfig.SetValue("Visibility", comboBoxVisibility.SelectedIndex);
+            if (checkBoxRunAtLogon.Checked == true)
+                regKeyRun.SetValue("WaitForService", (string)regKeyConfig.GetValue("wfsInstallPath"));
+            else
+                try { regKeyRun.DeleteValue("WaitForService"); }
+                catch { }
 
-                regKeyRun.Close();
-                regKeyConfig.Close();
-            }
+            regKeyRun.Close();
+            regKeyConfig.Close();
+
+            Environment.Exit(0);
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(-1);
         }
     }
 }
