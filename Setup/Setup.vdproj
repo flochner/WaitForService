@@ -16,13 +16,13 @@
         "Entry"
         {
         "MsmKey" = "8:_04C25F568AD1E2C9DFE429E0DF4A31A4"
-        "OwnerKey" = "8:_B500B8476B3A43099AF646C5E0BA1690"
+        "OwnerKey" = "8:_1C550544EA9744808C6DFAFECFD3EC12"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_04C25F568AD1E2C9DFE429E0DF4A31A4"
-        "OwnerKey" = "8:_1C550544EA9744808C6DFAFECFD3EC12"
+        "OwnerKey" = "8:_B500B8476B3A43099AF646C5E0BA1690"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -40,7 +40,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_04C25F568AD1E2C9DFE429E0DF4A31A4"
+        "OwnerKey" = "8:_B500B8476B3A43099AF646C5E0BA1690"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -52,7 +52,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B500B8476B3A43099AF646C5E0BA1690"
+        "OwnerKey" = "8:_04C25F568AD1E2C9DFE429E0DF4A31A4"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -73,6 +73,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -89,6 +97,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -145,7 +161,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
