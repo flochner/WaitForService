@@ -104,6 +104,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6"
+                    }
+                }
             }
         }
     }
@@ -111,6 +119,20 @@
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_9D33BA96B6C748AE8AC82676BA450F09"
+            {
+            "Name" = "8:Primary output from Configure (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_B500B8476B3A43099AF646C5E0BA1690"
+            "FileType" = "3:2"
+            "InstallAction" = "3:2"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_458FE92C_4909_4D6C_B195_229B186BF53C"
+            "InstallerClass" = "11:FALSE"
+            "CustomActionData" = "8:"
+            }
         }
         "DefaultFeature"
         {
@@ -126,7 +148,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.7.2"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.6"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=863262"
                 }
@@ -173,7 +195,7 @@
         {
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_0276B36A4B07499AB6D2FBAE6469B3D8"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -222,7 +244,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Setup"
         "ProductCode" = "8:{7576B06E-E6D0-48F2-A9F0-05C3FA58EE5E}"
-        "PackageCode" = "8:{A147706D-7BFE-4FF7-88EF-E13E69C5C247}"
+        "PackageCode" = "8:{7F8D5F98-E3C0-434B-AD85-EF97706D286F}"
         "UpgradeCode" = "8:{7D95DB8D-02D7-4A09-AE2F-E290A97E179B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -243,7 +265,7 @@
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:0"
+        "TargetPlatform" = "3:1"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
@@ -298,7 +320,7 @@
                                             "Condition" = "8:"
                                             "Transitive" = "11:FALSE"
                                             "ValueTypes" = "3:3"
-                                            "Value" = "3:0"
+                                            "Value" = "3:-1"
                                             }
                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_B935093CAA694ED18BE2E68C22B83C53"
                                             {
