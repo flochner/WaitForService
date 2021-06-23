@@ -4,6 +4,8 @@ In essence, this program  waits until a service is in the running state, then st
 
 My need for this came from a startup program I had which would launch before my PostgreSQL database was ready for connections.  
 
+It can start a service if run as administrator but this does not work when configured to run at logon.
+
 During install, a dialog box allows selection of a service on the local computer, explorer lookup of a program, and startup visibility (maximized, minimized, etc.).  
 
 It can be reconfigured by running Configure.exe or by holding down the shift key while WaitForService is starting.
