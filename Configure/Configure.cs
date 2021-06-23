@@ -87,7 +87,6 @@ namespace Configure
                     MessageBox.Show(ex.Message, ex.Source);
                 }
             }
-
         }
 
         private void CheckBoxMSsvcs_CheckedChanged(object sender, EventArgs e)
