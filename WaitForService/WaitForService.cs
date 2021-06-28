@@ -101,6 +101,13 @@ namespace WaitForService
         private bool LoadSettings()
         {
             RegistryKey regKeyConfig = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\ConRes\WaitForService");
+            if (regKeyConfig == null)
+            {
+                ModalMessageBox("Application not installed properly.\nPlease repair/modify installation.",
+                                "WaitForService", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
             svcName = (string)regKeyConfig.GetValue("Service");
             appName = (string)regKeyConfig.GetValue("Application");
             appVis = (int)regKeyConfig.GetValue("Visibility");
@@ -139,11 +146,11 @@ namespace WaitForService
             }
         }
 
-        private void ModalMessageBox(string message, string source)
+        private void ModalMessageBox(string text, string caption, MessageBoxButtons buttons = MessageBoxButtons.OK, MessageBoxIcon icon = MessageBoxIcon.None)
         {
             Invoke(new MethodInvoker(() =>
             {
-                MessageBox.Show(this, message, source);
+                MessageBox.Show(this, text, caption, buttons, icon);
             }));
         }
 

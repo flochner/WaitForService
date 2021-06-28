@@ -23,6 +23,13 @@ namespace Configure
             RegistryKey regKeyConfig = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\ConRes\WaitForService");
             RegistryKey regKeyRun = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
 
+            if (regKeyConfig == null || regKeyRun == null)
+            {
+                MessageBox.Show("Application not installed properly.\nPlease repair/modify installation.",
+                                "WaitForService", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Environment.Exit(-1);
+            }
+
             bool isInCVRun = !string.IsNullOrEmpty((string)regKeyRun.GetValue("WaitForService"));
             string svcName = (string)regKeyConfig.GetValue("Service");
             string appName = (string)regKeyConfig.GetValue("Application");
@@ -39,9 +46,6 @@ namespace Configure
 
         private void PopulateServices()
         {
-            string imagePath;
-            RegistryKey regKey;
-
             comboBoxService.Items.Clear();
             serviceList.Clear();
 
@@ -49,8 +53,8 @@ namespace Configure
 
             foreach (ServiceController service in services)
             {
-                regKey = Registry.LocalMachine.OpenSubKey("SYSTEM\\CurrentControlSet\\services\\" + service.ServiceName);
-                imagePath = regKey.GetValue("ImagePath").ToString().ToLower();
+                RegistryKey regKey = Registry.LocalMachine.OpenSubKey("SYSTEM\\CurrentControlSet\\services\\" + service.ServiceName);
+                string imagePath = regKey.GetValue("ImagePath").ToString().ToLower();
 
                 if (checkBoxMSsvcs.Checked &&
                     (imagePath.Contains("svchost") || imagePath.Contains("windows") || imagePath.Contains("microsoft")) &&
