@@ -23,7 +23,7 @@ namespace Configure
             RegistryKey regKeyConfig = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\ConRes\WaitForService");
             RegistryKey regKeyRun = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
 
-            if (regKeyConfig == null || regKeyRun == null)
+            if (regKeyConfig == null)
             {
                 MessageBox.Show("Application not installed properly.\nPlease repair/modify installation.",
                                 "WaitForService", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -53,7 +53,7 @@ namespace Configure
 
             foreach (ServiceController service in services)
             {
-                RegistryKey regKey = Registry.LocalMachine.OpenSubKey("SYSTEM\\CurrentControlSet\\services\\" + service.ServiceName);
+                RegistryKey regKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\services\" + service.ServiceName);
                 string imagePath = regKey.GetValue("ImagePath").ToString().ToLower();
 
                 if (checkBoxMSsvcs.Checked &&
