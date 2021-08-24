@@ -202,15 +202,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WaitForService"
-        "ProductCode" = "8:{A25429C8-D0E1-4C28-8C1F-859000380DEB}"
-        "PackageCode" = "8:{62743122-DDAC-4DED-9417-CF3B9E78FA54}"
+        "ProductCode" = "8:{E3CF2437-3DF0-441B-B03C-0FAA6E9CCB57}"
+        "PackageCode" = "8:{D1C8113D-1008-4EAB-AE6D-7D4BD868F9E6}"
         "UpgradeCode" = "8:{7D95DB8D-02D7-4A09-AE2F-E290A97E179B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.5.0"
+        "ProductVersion" = "8:1.6.0"
         "Manufacturer" = "8:ConRes"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -287,7 +287,7 @@
                                             "Condition" = "8:"
                                             "Transitive" = "11:FALSE"
                                             "ValueTypes" = "3:1"
-                                            "Value" = "8:false"
+                                            "Value" = "8:False"
                                             }
                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_B935093CAA694ED18BE2E68C22B83C53"
                                             {
@@ -296,14 +296,6 @@
                                             "Transitive" = "11:FALSE"
                                             "ValueTypes" = "3:1"
                                             "Value" = "8:"
-                                            }
-                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_BF63E46097A84D8D9DC74E258E4BA1EA"
-                                            {
-                                            "Name" = "8:"
-                                            "Condition" = "8:"
-                                            "Transitive" = "11:FALSE"
-                                            "ValueTypes" = "3:4"
-                                            "Value" = "8:0"
                                             }
                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_EC388F4571A642A5997FAFE77109F749"
                                             {
@@ -793,7 +785,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B500B8476B3A43099AF646C5E0BA1690"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\Configure\\obj\\x64\\Release\\Configure.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0276B36A4B07499AB6D2FBAE6469B3D8"
