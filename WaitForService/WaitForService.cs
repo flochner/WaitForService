@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.ServiceProcess;
 using System.Threading;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace WaitForService
 {
@@ -14,6 +15,7 @@ namespace WaitForService
         private int appVis;
         private string svcName;// = "postgresql-x64-9.3";
         private string appName;// = @"C:\Program Files (x86)\Fluke Calibration\LogWare III Client\LogWare3.exe";
+        private bool lockWorkstation;
 
         public WaitForService()
         {
@@ -111,6 +113,7 @@ namespace WaitForService
             svcName = (string)regKeyConfig.GetValue("Service");
             appName = (string)regKeyConfig.GetValue("Application");
             appVis = (int)regKeyConfig.GetValue("Visibility");
+            lockWorkstation = Convert.ToBoolean(regKeyConfig.GetValue("LockWorkstation"));
             
             Thread.Sleep(1000);
             if (string.IsNullOrEmpty(svcName) ||
@@ -127,6 +130,7 @@ namespace WaitForService
                 svcName = (string)regKeyConfig.GetValue("Service");
                 appName = (string)regKeyConfig.GetValue("Application");
                 appVis = (int)regKeyConfig.GetValue("Visibility");
+                lockWorkstation = Convert.ToBoolean(regKeyConfig.GetValue("LockWorkstation"));
             }
 
             regKeyConfig.Close();
@@ -162,6 +166,8 @@ namespace WaitForService
 
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (exitStatus == 0 && lockWorkstation == true)
+                LockWorkStation();
             Environment.Exit(exitStatus);
         }
 
@@ -172,6 +178,9 @@ namespace WaitForService
                 BackgroundWorker1.CancelAsync();
             }
         }
+
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern bool LockWorkStation();
     }
 }
 
