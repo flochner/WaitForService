@@ -175,7 +175,6 @@
             this.checkBoxLockWorkstation.TabIndex = 10;
             this.checkBoxLockWorkstation.Text = "Lock workstation after program start";
             this.checkBoxLockWorkstation.UseVisualStyleBackColor = true;
-            this.checkBoxLockWorkstation.CheckedChanged += new System.EventHandler(this.CheckBoxLockWorkstation_CheckedChanged);
             // 
             // Configure
             // 

@@ -130,11 +130,6 @@ namespace Configure
             SetOKbuttonStatus();
         }
 
-        private void CheckBoxLockWorkstation_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void SetOKbuttonStatus()
         {
             buttonOK.Enabled = !string.IsNullOrEmpty(comboBoxService.Text) &&
