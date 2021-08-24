@@ -281,6 +281,14 @@
                                             "ValueTypes" = "3:3"
                                             "Value" = "3:-1"
                                             }
+                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_4A045BF270844B9687C99C0D4E70880E"
+                                            {
+                                            "Name" = "8:LockWorkstation"
+                                            "Condition" = "8:"
+                                            "Transitive" = "11:FALSE"
+                                            "ValueTypes" = "3:1"
+                                            "Value" = "8:false"
+                                            }
                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_B935093CAA694ED18BE2E68C22B83C53"
                                             {
                                             "Name" = "8:Service"
@@ -288,6 +296,14 @@
                                             "Transitive" = "11:FALSE"
                                             "ValueTypes" = "3:1"
                                             "Value" = "8:"
+                                            }
+                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_BF63E46097A84D8D9DC74E258E4BA1EA"
+                                            {
+                                            "Name" = "8:"
+                                            "Condition" = "8:"
+                                            "Transitive" = "11:FALSE"
+                                            "ValueTypes" = "3:4"
+                                            "Value" = "8:0"
                                             }
                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_EC388F4571A642A5997FAFE77109F749"
                                             {
@@ -777,7 +793,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B500B8476B3A43099AF646C5E0BA1690"
             {
-            "SourcePath" = "8:..\\Configure\\obj\\x64\\Release\\Configure.exe"
+            "SourcePath" = "8:"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0276B36A4B07499AB6D2FBAE6469B3D8"

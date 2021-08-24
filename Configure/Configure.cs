@@ -15,7 +15,9 @@ namespace Configure
         {
             InitializeComponent();
             PopulateServices();
+#if !DEBUG
             LoadSettings();
+#endif
         }
 
         private void LoadSettings()
@@ -30,15 +32,11 @@ namespace Configure
                 Environment.Exit(-1);
             }
 
-            bool isInCVRun = !string.IsNullOrEmpty((string)regKeyRun.GetValue("WaitForService"));
-            string svcName = (string)regKeyConfig.GetValue("Service");
-            string appName = (string)regKeyConfig.GetValue("Application");
-            int appVis = (int)regKeyConfig.GetValue("Visibility");
-
-            comboBoxService.SelectedItem = svcName;
-            textBoxApp.Text = appName;
-            checkBoxRunAtLogon.Checked = isInCVRun;
-            comboBoxVisibility.SelectedIndex = appVis;
+            comboBoxService.SelectedItem = (string)regKeyConfig.GetValue("Service");
+            textBoxApp.Text = (string)regKeyConfig.GetValue("Application");
+            comboBoxVisibility.SelectedIndex = (int)regKeyConfig.GetValue("Visibility");
+            checkBoxRunAtLogon.Checked = !string.IsNullOrEmpty((string)regKeyRun.GetValue("WaitForService"));
+            checkBoxLockWorkstation.Checked = Convert.ToBoolean(regKeyConfig.GetValue("LockWorkstation"));
 
             regKeyRun.Close();
             regKeyConfig.Close();
@@ -132,6 +130,11 @@ namespace Configure
             SetOKbuttonStatus();
         }
 
+        private void CheckBoxLockWorkstation_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void SetOKbuttonStatus()
         {
             buttonOK.Enabled = !string.IsNullOrEmpty(comboBoxService.Text) &&
@@ -149,9 +152,11 @@ namespace Configure
             RegistryKey regKeyConfig = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\ConRes\WaitForService", true);
             RegistryKey regKeyRun = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
 
+#if !DEBUG
             regKeyConfig.SetValue("Service", comboBoxService.SelectedItem);
             regKeyConfig.SetValue("Application", textBoxApp.Text);
             regKeyConfig.SetValue("Visibility", comboBoxVisibility.SelectedIndex);
+            regKeyConfig.SetValue("LockWorkstation", checkBoxLockWorkstation.Checked.ToString());
             if (checkBoxRunAtLogon.Checked == true)
                 regKeyRun.SetValue("WaitForService", (string)regKeyConfig.GetValue("wfsInstallPath"));
             else
@@ -160,6 +165,7 @@ namespace Configure
 
             regKeyRun.Close();
             regKeyConfig.Close();
+#endif 
 
             Environment.Exit(0);
         }
@@ -167,6 +173,15 @@ namespace Configure
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
             Environment.Exit(-1);
+        }
+
+        private void CheckBoxRunAtLogon_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBoxLockWorkstation.Enabled = checkBoxRunAtLogon.Checked;
+            if (checkBoxRunAtLogon.Checked == false)
+            {
+                checkBoxLockWorkstation.Checked = false;
+            }
         }
     }
 }

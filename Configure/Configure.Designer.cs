@@ -39,6 +39,7 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.checkBoxMSsvcs = new System.Windows.Forms.CheckBox();
             this.checkBoxRunAtLogon = new System.Windows.Forms.CheckBox();
+            this.checkBoxLockWorkstation = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -122,7 +123,7 @@
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Enabled = false;
-            this.buttonOK.Location = new System.Drawing.Point(355, 89);
+            this.buttonOK.Location = new System.Drawing.Point(355, 112);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 0;
@@ -134,7 +135,7 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(436, 89);
+            this.buttonCancel.Location = new System.Drawing.Point(436, 112);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 6;
@@ -155,7 +156,6 @@
             // 
             // checkBoxRunAtLogon
             // 
-            this.checkBoxRunAtLogon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxRunAtLogon.AutoSize = true;
             this.checkBoxRunAtLogon.Location = new System.Drawing.Point(74, 93);
             this.checkBoxRunAtLogon.Name = "checkBoxRunAtLogon";
@@ -163,6 +163,19 @@
             this.checkBoxRunAtLogon.TabIndex = 9;
             this.checkBoxRunAtLogon.Text = "Run at logon";
             this.checkBoxRunAtLogon.UseVisualStyleBackColor = true;
+            this.checkBoxRunAtLogon.CheckedChanged += new System.EventHandler(this.CheckBoxRunAtLogon_CheckedChanged);
+            // 
+            // checkBoxLockWorkstation
+            // 
+            this.checkBoxLockWorkstation.AutoSize = true;
+            this.checkBoxLockWorkstation.Enabled = false;
+            this.checkBoxLockWorkstation.Location = new System.Drawing.Point(94, 116);
+            this.checkBoxLockWorkstation.Name = "checkBoxLockWorkstation";
+            this.checkBoxLockWorkstation.Size = new System.Drawing.Size(195, 17);
+            this.checkBoxLockWorkstation.TabIndex = 10;
+            this.checkBoxLockWorkstation.Text = "Lock workstation after program start";
+            this.checkBoxLockWorkstation.UseVisualStyleBackColor = true;
+            this.checkBoxLockWorkstation.CheckedChanged += new System.EventHandler(this.CheckBoxLockWorkstation_CheckedChanged);
             // 
             // Configure
             // 
@@ -170,7 +183,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(523, 124);
+            this.ClientSize = new System.Drawing.Size(523, 147);
+            this.Controls.Add(this.checkBoxLockWorkstation);
             this.Controls.Add(this.checkBoxRunAtLogon);
             this.Controls.Add(this.checkBoxMSsvcs);
             this.Controls.Add(this.buttonCancel);
@@ -205,5 +219,6 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.CheckBox checkBoxMSsvcs;
         private System.Windows.Forms.CheckBox checkBoxRunAtLogon;
+        private System.Windows.Forms.CheckBox checkBoxLockWorkstation;
     }
 }
