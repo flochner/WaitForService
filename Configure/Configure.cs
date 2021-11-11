@@ -177,6 +177,34 @@ namespace Configure
             {
                 checkBoxLockWorkstation.Checked = false;
             }
+            else
+            {
+                foreach (string[] user in GetComputerUsers())
+                {
+                    Console.WriteLine("User: {0}, {1}", user[0], user[1]);
+                }
+            }
+        }
+
+        private List<string[]> GetComputerUsers()
+        {
+            List<string[]> users = new List<string[]>();
+            RegistryKey regKeyUsers = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList");
+
+            foreach (var key in regKeyUsers.GetSubKeyNames())
+            {
+                if (key.StartsWith("S-1-5-21"))
+                {
+                    string[] values = new string[2];
+                    var profile = regKeyUsers.OpenSubKey(key);
+                    var path = profile.GetValue("ProfileImagePath").ToString().Split('\\');
+                    values[0] = path[path.Length - 1];
+                    values[1] = key;
+                    users.Add(values);
+                }
+            }
+
+            return users;
         }
     }
 }
