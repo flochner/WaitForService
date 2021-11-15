@@ -69,6 +69,35 @@ namespace Configure
             }
         }
 
+        private List<string[]> GetComputerUsers()
+        {
+            RegistryKey regKeyUsers = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList");
+
+            users.Clear();
+            foreach (var key in regKeyUsers.GetSubKeyNames())
+            {
+                if (key.StartsWith("S-1-5-21"))
+                {
+                    string[] values = new string[3];
+                    var profile = regKeyUsers.OpenSubKey(key);
+                    var path = profile.GetValue("ProfileImagePath");
+                    values[0] = path.ToString().Split('\\')[2];
+                    values[1] = path.ToString();
+                    values[2] = key;
+                    users.Add(values);
+                }
+            }
+            regKeyUsers.Close();
+            return users;
+        }
+
+        private void SetOKbuttonStatus()
+        {
+            buttonOK.Enabled = !string.IsNullOrEmpty(comboBoxService.Text) &&
+                               !string.IsNullOrEmpty(textBoxApp.Text) &&
+                               !string.IsNullOrEmpty(comboBoxVisibility.Text);
+        }
+
         private void ButtonBrowse_Click(object sender, EventArgs e)
         {
             string filePath;
@@ -94,55 +123,9 @@ namespace Configure
             }
         }
 
-        private void CheckBoxMSsvcs_CheckedChanged(object sender, EventArgs e)
+        private void ButtonCancel_Click(object sender, EventArgs e)
         {
-            PopulateServices();
-            SetOKbuttonStatus();
-        }
-
-        private void ComboBoxService_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (e.Index == -1)
-                return;
-
-            e.DrawBackground();
-
-            if (e.State.ToString().Contains("Selected"))
-            {
-                e.Graphics.DrawString(comboBoxService.Items[e.Index].ToString(), e.Font, Brushes.White, new Point(e.Bounds.X, e.Bounds.Y));
-                this.Text = serviceList[e.Index];
-            }
-            else
-            {
-                e.Graphics.DrawString(comboBoxService.Items[e.Index].ToString(), e.Font, Brushes.Black, new Point(e.Bounds.X, e.Bounds.Y));
-            }
-        }
-
-        private void ComboBoxService_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SetOKbuttonStatus();
-        }
-
-        private void TextBoxApp_TextChanged(object sender, EventArgs e)
-        {
-            SetOKbuttonStatus();
-        }
-
-        private void ComboBoxVisibility_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SetOKbuttonStatus();
-        }
-
-        private void SetOKbuttonStatus()
-        {
-            buttonOK.Enabled = !string.IsNullOrEmpty(comboBoxService.Text) &&
-                               !string.IsNullOrEmpty(textBoxApp.Text) &&
-                               !string.IsNullOrEmpty(comboBoxVisibility.Text);
-        }
-
-        private void ComboBoxService_Leave(object sender, EventArgs e)
-        {
-            this.Text = "WaitForService - Configuration";
+            Environment.Exit(-1);
         }
 
         private void ButtonOK_Click(object sender, EventArgs e)
@@ -176,9 +159,38 @@ namespace Configure
             Environment.Exit(0);
         }
 
-        private void ButtonCancel_Click(object sender, EventArgs e)
+        private void CheckBoxMSsvcs_CheckedChanged(object sender, EventArgs e)
         {
-            Environment.Exit(-1);
+            PopulateServices();
+            SetOKbuttonStatus();
+        }
+
+        private void ComboBoxService_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index == -1)
+                return;
+
+            e.DrawBackground();
+
+            if (e.State.ToString().Contains("Selected"))
+            {
+                e.Graphics.DrawString(comboBoxService.Items[e.Index].ToString(), e.Font, Brushes.White, new Point(e.Bounds.X, e.Bounds.Y));
+                this.Text = serviceList[e.Index];
+            }
+            else
+            {
+                e.Graphics.DrawString(comboBoxService.Items[e.Index].ToString(), e.Font, Brushes.Black, new Point(e.Bounds.X, e.Bounds.Y));
+            }
+        }
+
+        private void ComboBoxService_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetOKbuttonStatus();
+        }
+
+        private void ComboBoxService_Leave(object sender, EventArgs e)
+        {
+            this.Text = "WaitForService - Configuration";
         }
 
         private void CheckBoxRunAtLogon_CheckedChanged(object sender, EventArgs e)
@@ -205,41 +217,9 @@ namespace Configure
             }
         }
 
-        private List<string[]> GetComputerUsers()
-        {
-            RegistryKey regKeyUsers = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList");
-
-            users.Clear();
-            foreach (var key in regKeyUsers.GetSubKeyNames())
-            {
-                if (key.StartsWith("S-1-5-21"))
-                {
-                    string[] values = new string[3];
-                    var profile = regKeyUsers.OpenSubKey(key);
-                    var path = profile.GetValue("ProfileImagePath");
-                    values[0] = path.ToString().Split('\\')[2];
-                    values[1] = path.ToString();
-                    values[2] = key;
-                    users.Add(values);
-                }
-            }
-            regKeyUsers.Close();
-            return users;
-        }
-
         private void ComboBoxUsers_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
-        }
-
-        private void ComboBoxVisibility_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void ComboBoxVisibility_TextUpdate(object sender, EventArgs e)
-        {
-            comboBoxVisibility.SelectedIndex = -1;
         }
 
         private void ComboBoxUsers_SelectedIndexChanged(object sender, EventArgs e)
@@ -250,6 +230,26 @@ namespace Configure
         private void ComboBoxUsers_TextUpdate(object sender, EventArgs e)
         {
             comboBoxUsers.SelectedIndex = -1;
+        }
+
+        private void ComboBoxVisibility_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void ComboBoxVisibility_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetOKbuttonStatus();
+        }
+
+        private void ComboBoxVisibility_TextUpdate(object sender, EventArgs e)
+        {
+            comboBoxVisibility.SelectedIndex = -1;
+        }
+
+        private void TextBoxApp_TextChanged(object sender, EventArgs e)
+        {
+            SetOKbuttonStatus();
         }
 
     }
