@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.ServiceProcess;
 using System.Windows.Forms;
 
@@ -9,7 +10,8 @@ namespace Configure
 {
     public partial class Configure : Form
     {
-        private readonly List<string> serviceList = new List<string>();
+        private List<string> serviceList = new List<string>();
+        private List<string[]> users = new List<string[]>();
 
         public Configure()
         {
@@ -23,7 +25,7 @@ namespace Configure
         private void LoadSettings()
         {
             RegistryKey regKeyConfig = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\ConRes\WaitForService");
-            RegistryKey regKeyRun = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
+            //RegistryKey regKeyRun = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
 
             if (regKeyConfig == null)
             {
@@ -35,10 +37,11 @@ namespace Configure
             comboBoxService.SelectedItem = (string)regKeyConfig.GetValue("Service");
             textBoxApp.Text = (string)regKeyConfig.GetValue("Application");
             comboBoxVisibility.SelectedIndex = (int)regKeyConfig.GetValue("Visibility");
-            checkBoxRunAtLogon.Checked = !string.IsNullOrEmpty((string)regKeyRun.GetValue("WaitForService"));
+            // checkBoxRunAtLogon.Checked = !string.IsNullOrEmpty((string)regKeyRun.GetValue("WaitForService"));
             checkBoxLockWorkstation.Checked = Convert.ToBoolean(regKeyConfig.GetValue("LockWorkstation"));
+            comboBoxUsers.Text = (string)regKeyConfig.GetValue("StartupUser");
 
-            regKeyRun.Close();
+            //regKeyRun.Close();
             regKeyConfig.Close();
         }
 
@@ -145,23 +148,31 @@ namespace Configure
         private void ButtonOK_Click(object sender, EventArgs e)
         {
             RegistryKey regKeyConfig = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\ConRes\WaitForService", true);
-            RegistryKey regKeyRun = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+            //RegistryKey regKeyRun = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+            string allUsersPath = @Environment.GetEnvironmentVariable("ALLUSERSPROFILE");
+            string userPath = users[1] + @"\AppData\Local";
+            string startUp = @"\Microsoft\Windows\Start Menu\Programs\Startup";
+
+            // delete shortcut from last install
+            // 
+
 
 #if !DEBUG
-            regKeyConfig.SetValue("Service", comboBoxService.SelectedItem);
-            regKeyConfig.SetValue("Application", textBoxApp.Text);
-            regKeyConfig.SetValue("Visibility", comboBoxVisibility.SelectedIndex);
-            regKeyConfig.SetValue("LockWorkstation", checkBoxLockWorkstation.Checked.ToString());
-            if (checkBoxRunAtLogon.Checked == true)
-                regKeyRun.SetValue("WaitForService", (string)regKeyConfig.GetValue("wfsInstallPath"));
-            else
-                try { regKeyRun.DeleteValue("WaitForService"); }
-                catch { }
-
-            regKeyRun.Close();
-            regKeyConfig.Close();
+            if (regKeyConfig != null)
+            {
+                regKeyConfig.SetValue("Service", comboBoxService.SelectedItem);
+                regKeyConfig.SetValue("Application", textBoxApp.Text);
+                regKeyConfig.SetValue("Visibility", comboBoxVisibility.SelectedIndex);
+                regKeyConfig.SetValue("LockWorkstation", checkBoxLockWorkstation.Checked.ToString());
+                //if (checkBoxRunAtLogon.Checked == true)
+                //    regKeyRun.SetValue("WaitForService", (string)regKeyConfig.GetValue("wfsInstallPath"));
+                //else
+                //    try { regKeyRun.DeleteValue("WaitForService"); }
+                //    catch { }
+                //regKeyRun.Close();
+                regKeyConfig.Close();
+            }
 #endif 
-
             Environment.Exit(0);
         }
 
@@ -173,38 +184,73 @@ namespace Configure
         private void CheckBoxRunAtLogon_CheckedChanged(object sender, EventArgs e)
         {
             checkBoxLockWorkstation.Enabled = checkBoxRunAtLogon.Checked;
+            comboBoxUsers.Enabled = checkBoxRunAtLogon.Checked;
             if (checkBoxRunAtLogon.Checked == false)
             {
                 checkBoxLockWorkstation.Checked = false;
+                comboBoxUsers.SelectedIndex = -1;
+                comboBoxUsers.Text = "";
+
             }
             else
             {
+                comboBoxUsers.Items.Clear();
+                comboBoxUsers.Text = "Select User:";
+                comboBoxUsers.Items.Add("All Users");
                 foreach (string[] user in GetComputerUsers())
                 {
-                    Console.WriteLine("User: {0}, {1}", user[0], user[1]);
+                    comboBoxUsers.Items.Add(user[0]);
+                    Console.WriteLine("User: {0}, {1}, {2}", user[0], user[1], user[2]);
                 }
             }
         }
 
         private List<string[]> GetComputerUsers()
         {
-            List<string[]> users = new List<string[]>();
             RegistryKey regKeyUsers = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList");
 
+            users.Clear();
             foreach (var key in regKeyUsers.GetSubKeyNames())
             {
                 if (key.StartsWith("S-1-5-21"))
                 {
-                    string[] values = new string[2];
+                    string[] values = new string[3];
                     var profile = regKeyUsers.OpenSubKey(key);
-                    var path = profile.GetValue("ProfileImagePath").ToString().Split('\\');
-                    values[0] = path[path.Length - 1];
-                    values[1] = key;
+                    var path = profile.GetValue("ProfileImagePath");
+                    values[0] = path.ToString().Split('\\')[2];
+                    values[1] = path.ToString();
+                    values[2] = key;
                     users.Add(values);
                 }
             }
-
+            regKeyUsers.Close();
             return users;
         }
+
+        private void ComboBoxUsers_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void ComboBoxVisibility_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void ComboBoxVisibility_TextUpdate(object sender, EventArgs e)
+        {
+            comboBoxVisibility.SelectedIndex = -1;
+        }
+
+        private void ComboBoxUsers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ComboBoxUsers_TextUpdate(object sender, EventArgs e)
+        {
+            comboBoxUsers.SelectedIndex = -1;
+        }
+
     }
 }

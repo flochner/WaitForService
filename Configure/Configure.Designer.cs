@@ -34,27 +34,28 @@
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxService = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBoxVisibility = new System.Windows.Forms.ComboBox();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.checkBoxMSsvcs = new System.Windows.Forms.CheckBox();
             this.checkBoxRunAtLogon = new System.Windows.Forms.CheckBox();
             this.checkBoxLockWorkstation = new System.Windows.Forms.CheckBox();
+            this.comboBoxUsers = new System.Windows.Forms.ComboBox();
+            this.comboBoxVisibility = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(25, 15);
+            this.label1.Location = new System.Drawing.Point(62, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Service";
+            this.label1.Text = "Service ";
             // 
             // textBoxApp
             // 
-            this.textBoxApp.Location = new System.Drawing.Point(74, 39);
+            this.textBoxApp.Location = new System.Drawing.Point(114, 39);
             this.textBoxApp.Name = "textBoxApp";
             this.textBoxApp.Size = new System.Drawing.Size(292, 20);
             this.textBoxApp.TabIndex = 2;
@@ -62,7 +63,7 @@
             // 
             // buttonBrowse
             // 
-            this.buttonBrowse.Location = new System.Drawing.Point(372, 37);
+            this.buttonBrowse.Location = new System.Drawing.Point(412, 37);
             this.buttonBrowse.Name = "buttonBrowse";
             this.buttonBrowse.Size = new System.Drawing.Size(75, 23);
             this.buttonBrowse.TabIndex = 3;
@@ -74,18 +75,18 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(9, 42);
+            this.label2.Location = new System.Drawing.Point(46, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 13);
+            this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Application";
+            this.label2.Text = "Application ";
             // 
             // comboBoxService
             // 
             this.comboBoxService.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxService.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxService.FormattingEnabled = true;
-            this.comboBoxService.Location = new System.Drawing.Point(74, 12);
+            this.comboBoxService.Location = new System.Drawing.Point(114, 12);
             this.comboBoxService.MaxDropDownItems = 15;
             this.comboBoxService.Name = "comboBoxService";
             this.comboBoxService.Size = new System.Drawing.Size(292, 21);
@@ -98,32 +99,18 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(25, 69);
+            this.label3.Location = new System.Drawing.Point(62, 69);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.Size = new System.Drawing.Size(46, 13);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Visibility";
-            // 
-            // comboBoxVisibility
-            // 
-            this.comboBoxVisibility.FormattingEnabled = true;
-            this.comboBoxVisibility.Items.AddRange(new object[] {
-            "Normal",
-            "Hidden",
-            "Minimized",
-            "Maximized"});
-            this.comboBoxVisibility.Location = new System.Drawing.Point(74, 66);
-            this.comboBoxVisibility.Name = "comboBoxVisibility";
-            this.comboBoxVisibility.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxVisibility.TabIndex = 4;
-            this.comboBoxVisibility.SelectedIndexChanged += new System.EventHandler(this.ComboBoxVisibility_SelectedIndexChanged);
+            this.label3.Text = "Visibility ";
             // 
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Enabled = false;
-            this.buttonOK.Location = new System.Drawing.Point(355, 112);
+            this.buttonOK.Location = new System.Drawing.Point(410, 144);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 0;
@@ -135,7 +122,7 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(436, 112);
+            this.buttonCancel.Location = new System.Drawing.Point(491, 144);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 6;
@@ -146,7 +133,7 @@
             // checkBoxMSsvcs
             // 
             this.checkBoxMSsvcs.AutoSize = true;
-            this.checkBoxMSsvcs.Location = new System.Drawing.Point(372, 14);
+            this.checkBoxMSsvcs.Location = new System.Drawing.Point(412, 14);
             this.checkBoxMSsvcs.Name = "checkBoxMSsvcs";
             this.checkBoxMSsvcs.Size = new System.Drawing.Size(136, 17);
             this.checkBoxMSsvcs.TabIndex = 0;
@@ -157,7 +144,7 @@
             // checkBoxRunAtLogon
             // 
             this.checkBoxRunAtLogon.AutoSize = true;
-            this.checkBoxRunAtLogon.Location = new System.Drawing.Point(74, 93);
+            this.checkBoxRunAtLogon.Location = new System.Drawing.Point(21, 95);
             this.checkBoxRunAtLogon.Name = "checkBoxRunAtLogon";
             this.checkBoxRunAtLogon.Size = new System.Drawing.Size(87, 17);
             this.checkBoxRunAtLogon.TabIndex = 9;
@@ -169,12 +156,40 @@
             // 
             this.checkBoxLockWorkstation.AutoSize = true;
             this.checkBoxLockWorkstation.Enabled = false;
-            this.checkBoxLockWorkstation.Location = new System.Drawing.Point(94, 116);
+            this.checkBoxLockWorkstation.Location = new System.Drawing.Point(114, 120);
             this.checkBoxLockWorkstation.Name = "checkBoxLockWorkstation";
             this.checkBoxLockWorkstation.Size = new System.Drawing.Size(195, 17);
             this.checkBoxLockWorkstation.TabIndex = 10;
             this.checkBoxLockWorkstation.Text = "Lock workstation after program start";
             this.checkBoxLockWorkstation.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxUsers
+            // 
+            this.comboBoxUsers.Enabled = false;
+            this.comboBoxUsers.FormattingEnabled = true;
+            this.comboBoxUsers.Location = new System.Drawing.Point(114, 93);
+            this.comboBoxUsers.Name = "comboBoxUsers";
+            this.comboBoxUsers.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxUsers.TabIndex = 11;
+            this.comboBoxUsers.SelectedIndexChanged += new System.EventHandler(this.ComboBoxUsers_SelectedIndexChanged);
+            this.comboBoxUsers.TextUpdate += new System.EventHandler(this.ComboBoxUsers_TextUpdate);
+            this.comboBoxUsers.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBoxUsers_KeyPress);
+            // 
+            // comboBoxVisibility
+            // 
+            this.comboBoxVisibility.FormattingEnabled = true;
+            this.comboBoxVisibility.Items.AddRange(new object[] {
+            "Normal",
+            "Hidden",
+            "Minimized",
+            "Maximized"});
+            this.comboBoxVisibility.Location = new System.Drawing.Point(114, 66);
+            this.comboBoxVisibility.Name = "comboBoxVisibility";
+            this.comboBoxVisibility.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxVisibility.TabIndex = 4;
+            this.comboBoxVisibility.SelectedIndexChanged += new System.EventHandler(this.ComboBoxVisibility_SelectedIndexChanged);
+            this.comboBoxVisibility.TextUpdate += new System.EventHandler(this.ComboBoxVisibility_TextUpdate);
+            this.comboBoxVisibility.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBoxVisibility_KeyPress);
             // 
             // Configure
             // 
@@ -182,7 +197,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(523, 147);
+            this.ClientSize = new System.Drawing.Size(578, 179);
+            this.Controls.Add(this.comboBoxUsers);
             this.Controls.Add(this.checkBoxLockWorkstation);
             this.Controls.Add(this.checkBoxRunAtLogon);
             this.Controls.Add(this.checkBoxMSsvcs);
@@ -213,11 +229,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBoxService;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBoxVisibility;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.CheckBox checkBoxMSsvcs;
         private System.Windows.Forms.CheckBox checkBoxRunAtLogon;
         private System.Windows.Forms.CheckBox checkBoxLockWorkstation;
+        private System.Windows.Forms.ComboBox comboBoxUsers;
+        private System.Windows.Forms.ComboBox comboBoxVisibility;
     }
 }
