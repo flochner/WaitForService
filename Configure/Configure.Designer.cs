@@ -133,6 +133,8 @@
             // checkBoxMSsvcs
             // 
             this.checkBoxMSsvcs.AutoSize = true;
+            this.checkBoxMSsvcs.Checked = true;
+            this.checkBoxMSsvcs.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxMSsvcs.Location = new System.Drawing.Point(412, 14);
             this.checkBoxMSsvcs.Name = "checkBoxMSsvcs";
             this.checkBoxMSsvcs.Size = new System.Drawing.Size(136, 17);
