@@ -109,6 +109,20 @@
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_18F4C85CD76E4828BEEE351E8920FFA0"
+            {
+            "Name" = "8:Primary output from Configure (Active) with argument"
+            "Condition" = "8:"
+            "Object" = "8:_B500B8476B3A43099AF646C5E0BA1690"
+            "FileType" = "3:2"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:True"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_EA66D667_F5E7_4A5A_BF6F_B0FE71BA2494"
+            "InstallerClass" = "11:FALSE"
+            "CustomActionData" = "8:"
+            }
             "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_9D33BA96B6C748AE8AC82676BA450F09"
             {
             "Name" = "8:Primary output from Configure (Active)"
@@ -156,7 +170,7 @@
             {
             "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
-            "AlwaysCreate" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:TARGETDIR"
@@ -203,7 +217,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WaitForService"
         "ProductCode" = "8:{A7459818-787A-4D71-BFC6-F02B91B6943A}"
-        "PackageCode" = "8:{5676E995-4E38-4E83-AF8A-677618BE8ACF}"
+        "PackageCode" = "8:{5727B561-CA25-431D-831D-35EF7A5CF576}"
         "UpgradeCode" = "8:{7D95DB8D-02D7-4A09-AE2F-E290A97E179B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -289,9 +303,25 @@
                                             "ValueTypes" = "3:1"
                                             "Value" = "8:False"
                                             }
+                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_83898DEC76C94289A8EE29ADEA4489A1"
+                                            {
+                                            "Name" = "8:ShortcutPath"
+                                            "Condition" = "8:"
+                                            "Transitive" = "11:FALSE"
+                                            "ValueTypes" = "3:1"
+                                            "Value" = "8:"
+                                            }
                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_B935093CAA694ED18BE2E68C22B83C53"
                                             {
                                             "Name" = "8:Service"
+                                            "Condition" = "8:"
+                                            "Transitive" = "11:FALSE"
+                                            "ValueTypes" = "3:1"
+                                            "Value" = "8:"
+                                            }
+                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_E74A34C420854D8CBEA10B24E1444712"
+                                            {
+                                            "Name" = "8:StartupUser"
                                             "Condition" = "8:"
                                             "Transitive" = "11:FALSE"
                                             "ValueTypes" = "3:1"
@@ -305,70 +335,6 @@
                                             "ValueTypes" = "3:1"
                                             "Value" = "8:"
                                             }
-                                        }
-                                    }
-                                }
-                                "Values"
-                                {
-                                }
-                            }
-                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_CB436668848D4D6B92E0BB832D5CD033"
-                            {
-                            "Name" = "8:Microsoft"
-                            "Condition" = "8:"
-                            "AlwaysCreate" = "11:FALSE"
-                            "DeleteAtUninstall" = "11:FALSE"
-                            "Transitive" = "11:FALSE"
-                                "Keys"
-                                {
-                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_E3CF451C5CE94470986931119872C025"
-                                    {
-                                    "Name" = "8:Windows"
-                                    "Condition" = "8:"
-                                    "AlwaysCreate" = "11:FALSE"
-                                    "DeleteAtUninstall" = "11:FALSE"
-                                    "Transitive" = "11:FALSE"
-                                        "Keys"
-                                        {
-                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_03EF353C75E64F56BF141AAF9411D094"
-                                            {
-                                            "Name" = "8:CurrentVersion"
-                                            "Condition" = "8:"
-                                            "AlwaysCreate" = "11:FALSE"
-                                            "DeleteAtUninstall" = "11:FALSE"
-                                            "Transitive" = "11:FALSE"
-                                                "Keys"
-                                                {
-                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_155D43A1DE7A476AB63DA0637262A6AD"
-                                                    {
-                                                    "Name" = "8:Run"
-                                                    "Condition" = "8:"
-                                                    "AlwaysCreate" = "11:FALSE"
-                                                    "DeleteAtUninstall" = "11:FALSE"
-                                                    "Transitive" = "11:FALSE"
-                                                        "Keys"
-                                                        {
-                                                        }
-                                                        "Values"
-                                                        {
-                                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_18F9C64A6D344357ABF903E6D7FEAEFB"
-                                                            {
-                                                            "Name" = "8:WaitForService"
-                                                            "Condition" = "8:"
-                                                            "Transitive" = "11:FALSE"
-                                                            "ValueTypes" = "3:1"
-                                                            "Value" = "8:"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                                "Values"
-                                                {
-                                                }
-                                            }
-                                        }
-                                        "Values"
-                                        {
                                         }
                                     }
                                 }
@@ -413,6 +379,20 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A743B5154FB04F9190A3514E8015FAB5"
+            {
+            "Name" = "8:WaitForService"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_17A47EE9E1B64E5886F9AE040BE5E8DE"
+            "Folder" = "8:_0276B36A4B07499AB6D2FBAE6469B3D8"
+            "WorkingFolder" = "8:_0276B36A4B07499AB6D2FBAE6469B3D8"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
