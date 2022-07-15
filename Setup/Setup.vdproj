@@ -64,10 +64,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    "Name" = "8:Microsoft .NET Framework 4.6 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6"
                     }
                 }
             }
@@ -187,6 +187,17 @@
             "Property" = "8:ProgramMenuFolder"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_CDA845BDE56B4D2785767FC463E301DF"
+                    {
+                    "Name" = "8:WaitForService"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_B676835CA6FF42A19EC766FBFD89ABAC"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_B6CFD9CB018A4B31A411DB0EA7F8ED38"
@@ -216,15 +227,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WaitForService"
-        "ProductCode" = "8:{0C2608E3-3697-4B55-82CF-F7F9C7D3AE7F}"
-        "PackageCode" = "8:{7D0EF302-019B-4006-96F0-FF6B8B2C5804}"
-        "UpgradeCode" = "8:{7D95DB8D-02D7-4A09-AE2F-E290A97E179B}"
+        "ProductCode" = "8:{365D476C-449D-429B-9842-C917D1DAB89B}"
+        "PackageCode" = "8:{3B8CA3FB-7D12-401E-942A-F0C2E1114C47}"
+        "UpgradeCode" = "8:{655568EF-FAF9-4461-86E1-9757820A6A2B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.7.1"
+        "ProductVersion" = "8:1.8.0"
         "Manufacturer" = "8:ConRes"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -279,14 +290,6 @@
                                         }
                                         "Values"
                                         {
-                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_04B0E4FC53244001B31E14B84066B6A6"
-                                            {
-                                            "Name" = "8:wfsInstallPath"
-                                            "Condition" = "8:"
-                                            "Transitive" = "11:FALSE"
-                                            "ValueTypes" = "3:1"
-                                            "Value" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]\\[ProductName].exe"
-                                            }
                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_3FB38120D8EC4FC5901C8DA869D2A821"
                                             {
                                             "Name" = "8:Visibility"
@@ -297,7 +300,7 @@
                                             }
                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_4A045BF270844B9687C99C0D4E70880E"
                                             {
-                                            "Name" = "8:LockWorkstation"
+                                            "Name" = "8:Lock Workstation"
                                             "Condition" = "8:"
                                             "Transitive" = "11:FALSE"
                                             "ValueTypes" = "3:1"
@@ -305,11 +308,19 @@
                                             }
                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_83898DEC76C94289A8EE29ADEA4489A1"
                                             {
-                                            "Name" = "8:ShortcutPath"
+                                            "Name" = "8:Startup Path"
                                             "Condition" = "8:"
                                             "Transitive" = "11:FALSE"
                                             "ValueTypes" = "3:1"
                                             "Value" = "8:"
+                                            }
+                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_ADD4979699A1488AAC91FAF28F825905"
+                                            {
+                                            "Name" = "8:Install Directory"
+                                            "Condition" = "8:"
+                                            "Transitive" = "11:FALSE"
+                                            "ValueTypes" = "3:1"
+                                            "Value" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
                                             }
                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_B935093CAA694ED18BE2E68C22B83C53"
                                             {
@@ -321,7 +332,7 @@
                                             }
                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_E74A34C420854D8CBEA10B24E1444712"
                                             {
-                                            "Name" = "8:StartupUser"
+                                            "Name" = "8:Startup User"
                                             "Condition" = "8:"
                                             "Transitive" = "11:FALSE"
                                             "ValueTypes" = "3:1"
@@ -379,7 +390,21 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A743B5154FB04F9190A3514E8015FAB5"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_16450B79472B42BEA2CB2DFCBB6C00AA"
+            {
+            "Name" = "8:Configure"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_B500B8476B3A43099AF646C5E0BA1690"
+            "Folder" = "8:_CDA845BDE56B4D2785767FC463E301DF"
+            "WorkingFolder" = "8:_0276B36A4B07499AB6D2FBAE6469B3D8"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8EFB1936C40A44B7BA6915D48F010D10"
             {
             "Name" = "8:WaitForService"
             "Arguments" = "8:"
@@ -409,6 +434,28 @@
             "Attributes" = "3:1"
                 "Dialogs"
                 {
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_3642E4D7BCCD44D6B884FD47DE5D7F57"
+                    {
+                    "Sequence" = "3:110"
+                    "DisplayName" = "8:Installation Folder"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdAdminFolderDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_3C97A4788C0342B895C67322B65989FE"
                     {
                     "Sequence" = "3:100"
@@ -459,7 +506,7 @@
                     }
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_AEBD1E658052459E8653AB78D80CC7F7"
                     {
-                    "Sequence" = "3:300"
+                    "Sequence" = "3:200"
                     "DisplayName" = "8:Confirm Installation"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
@@ -490,7 +537,7 @@
                 {
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_1026CF61DD9D4428A45BE8260192A6FF"
                     {
-                    "Sequence" = "3:300"
+                    "Sequence" = "3:200"
                     "DisplayName" = "8:Confirm Installation"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"

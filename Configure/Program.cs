@@ -13,6 +13,7 @@ namespace Configure
         [STAThread]
         static void Main(string[] args)
         {
+            /// This section exists to delete the placed shortcut during uninstall.  
             try
             {
                 if (Convert.ToBoolean(args[0]))

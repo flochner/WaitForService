@@ -12,17 +12,15 @@ namespace Configure
     {
         private List<string> serviceList = new List<string>();
         private List<string[]> users = new List<string[]>();
-        private string startupUserRegistry = "";
-        private string shortcutPathRegistry = "";
+        private string startupPathRegistry = "";
+        private string installDirRegistry = "";
 
         public Configure()
         {
             InitializeComponent();
             PopulateServices();
             GetComputerUsers();
-//#if !DEBUG
             LoadSettings();
-//#endif
         }
 
         private void LoadSettings()
@@ -39,10 +37,11 @@ namespace Configure
             comboBoxService.SelectedItem = (string)regKeyConfig.GetValue("Service");
             textBoxApp.Text = (string)regKeyConfig.GetValue("Application");
             comboBoxVisibility.SelectedIndex = (int)regKeyConfig.GetValue("Visibility");
-            checkBoxRunAtLogon.Checked = !string.IsNullOrEmpty((string)regKeyConfig.GetValue("StartupUser"));
-            checkBoxLockWorkstation.Checked = Convert.ToBoolean(regKeyConfig.GetValue("LockWorkstation"));
-            comboBoxUsers.Text = startupUserRegistry = (string)regKeyConfig.GetValue("StartupUser");
-            shortcutPathRegistry = (string)regKeyConfig.GetValue("ShortcutPath");
+            checkBoxRunAtLogon.Checked = !string.IsNullOrEmpty((string)regKeyConfig.GetValue("Startup User"));
+            checkBoxLockWorkstation.Checked = Convert.ToBoolean(regKeyConfig.GetValue("Lock Workstation"));
+            comboBoxUsers.Text = (string)regKeyConfig.GetValue("Startup User");
+            startupPathRegistry = (string)regKeyConfig.GetValue("Startup Path");
+            installDirRegistry = (string)regKeyConfig.GetValue("Install Directory");
 
             regKeyConfig.Close();
         }
@@ -102,43 +101,51 @@ namespace Configure
                                 checkBoxRunAtLogon.Checked == false);
         }
 
-        private void HandleShortcut()
+        private string HandleShortcut()
         {
-            RegistryKey regKeyConfig = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\ConRes\WaitForService", true);
-            string allUsersPath = @Environment.GetEnvironmentVariable("ALLUSERSPROFILE") + @"\AppData\Local";
-            string startUpDir = @"\Microsoft\Windows\Start Menu\Programs\Startup";
+            string startupPath = "";
+            string shortcutFile = "WaitForService.lnk";
+            string allUsersDir = @Environment.GetEnvironmentVariable("AllUsersProfile");
+            string startUpDir = @"Microsoft\Windows\Start Menu\Programs\Startup";
+            string shortcutProgdirPath = @Path.Combine(installDirRegistry, shortcutFile).ToString();
 
-            string installPath = (string)regKeyConfig.GetValue("wfsInstallPath");
-            FileInfo shortcutProgDir = new FileInfo(Path.ChangeExtension(installPath, "lnk"));
-
-            if (!startupUserRegistry.Equals(""))
+            if (startupPathRegistry.Length > 0)
             {
-                FileInfo shortcutStartupDir = new FileInfo(shortcutPathRegistry);
-                shortcutStartupDir.Delete();
+                try
+                {
+                    new FileInfo(startupPathRegistry).Delete();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.StackTrace, ex.Source);
+                }
             }
 
             if (checkBoxRunAtLogon.Checked == true)
             {
-                string startupPath;
-                if (startupUserRegistry.Equals("All Users"))
+                if (comboBoxUsers.Text.Equals("All Users"))
                 {
-                    startupPath = allUsersPath + startUpDir;
+                    startupPath = @Path.Combine(allUsersDir, startUpDir, shortcutFile).ToString();
                 }
                 else
                 {
                     int i = 0;
-                    while (!users[i][0].Equals(comboBoxUsers.SelectedItem))
+                    while (!comboBoxUsers.SelectedItem.Equals(users[i][0]))
                         i++;
-                    string userPath = users[i][1] + @"\AppData\Roaming";
-                    startupPath = userPath + startUpDir;
+                    var userDir = Path.Combine(users[i][1], @"AppData\Roaming");
+                    startupPath = @Path.Combine(userDir, startUpDir, shortcutFile).ToString();
                 }
 
-                try { shortcutProgDir.CopyTo(startupPath + @"\WaitForService.lnk"); }
-                catch (IOException) { }
-
-                regKeyConfig.SetValue("ShortcutPath", startupPath + @"\WaitForService.lnk");
+                try
+                {
+                    File.Copy(shortcutProgdirPath, startupPath, true);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.StackTrace, ex.Source);
+                }
             }
-            regKeyConfig.Close();
+            return startupPath;
         }
 
         private void ButtonBrowse_Click(object sender, EventArgs e)
@@ -147,7 +154,7 @@ namespace Configure
 
             using (OpenFileDialog openFile = new OpenFileDialog())
             {
-                openFile.InitialDirectory = @"C:\Program Files";
+                openFile.InitialDirectory = @Environment.GetEnvironmentVariable("ProgramFiles");
                 openFile.Filter = "Programs (*.exe;*.com)|*.exe;*.com|Batch Files (*.bat;*.cmd)|*.bat;*.cmd|All files (*.*)|*.*";
                 openFile.FilterIndex = 1;
                 openFile.RestoreDirectory = true;
@@ -173,23 +180,20 @@ namespace Configure
 
         private void ButtonOK_Click(object sender, EventArgs e)
         {
-//#if !DEBUG
-            HandleShortcut();
-
+            string startupPath = HandleShortcut();
             RegistryKey regKeyConfig = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\ConRes\WaitForService", true);
-            if (regKeyConfig != null)
-            {
-                regKeyConfig.SetValue("Service", comboBoxService.SelectedItem);
-                regKeyConfig.SetValue("Application", textBoxApp.Text);
-                regKeyConfig.SetValue("Visibility", comboBoxVisibility.SelectedIndex);
-                regKeyConfig.SetValue("LockWorkstation", checkBoxLockWorkstation.Checked.ToString());
-                if (checkBoxRunAtLogon.Checked == true)
-                    regKeyConfig.SetValue("StartupUser", comboBoxUsers.SelectedItem);
-                else
-                    regKeyConfig.SetValue("StartupUser", "");
-                regKeyConfig.Close();
-            }
-//#endif 
+
+            regKeyConfig.SetValue("Service", comboBoxService.SelectedItem);
+            regKeyConfig.SetValue("Application", textBoxApp.Text);
+            regKeyConfig.SetValue("Visibility", comboBoxVisibility.SelectedIndex);
+            regKeyConfig.SetValue("Lock Workstation", checkBoxLockWorkstation.Checked.ToString());
+            if (checkBoxRunAtLogon.Checked == true)
+                regKeyConfig.SetValue("Startup User", comboBoxUsers.SelectedItem);
+            else
+                regKeyConfig.SetValue("Startup User", "");
+            regKeyConfig.SetValue("Startup Path", startupPath);
+            regKeyConfig.Close();
+
             Environment.Exit(0);
         }
 

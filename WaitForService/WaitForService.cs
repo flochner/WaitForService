@@ -113,7 +113,7 @@ namespace WaitForService
             svcName = (string)regKeyConfig.GetValue("Service");
             appName = (string)regKeyConfig.GetValue("Application");
             appVis = (int)regKeyConfig.GetValue("Visibility");
-            lockWorkstation = Convert.ToBoolean(regKeyConfig.GetValue("LockWorkstation"));
+            lockWorkstation = Convert.ToBoolean(regKeyConfig.GetValue("Lock Workstation"));
             
             Thread.Sleep(1000);
             if (string.IsNullOrEmpty(svcName) ||
